@@ -30,12 +30,12 @@ export default function Home() {
           <p>See comparisons, swaps, and sorted elements highlighted in real time.</p>
         </article>
         <article className="info-card">
-          <h2>Learning Through Control</h2>
-          <p>Start, pause, reset, and adjust speed to match your understanding pace.</p>
+          <h2>C++ + BAC Practice</h2>
+          <p>Study C++ implementations and BAC-inspired solved problem patterns in dedicated sections.</p>
         </article>
         <article className="info-card">
-          <h2>Built for Students</h2>
-          <p>Designed to make algorithm behavior intuitive, memorable, and engaging.</p>
+          <h2>Beyond Basics</h2>
+          <p>Explore search visualizers, complexity insights, and exam-ready algorithm strategies.</p>
         </article>
       </section>
     </main>

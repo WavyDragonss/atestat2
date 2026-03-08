@@ -293,6 +293,10 @@ textarea {
   gap: 0.35rem;
 }
 
+.stacked-visualizer {
+  margin-top: 1rem;
+}
+
 .bar-slot {
   display: flex;
   flex-direction: column;
@@ -341,6 +345,60 @@ textarea {
   display: grid;
   gap: 0.45rem;
   color: var(--ink-200);
+}
+
+.code-card pre {
+  margin: 0.8rem 0 0;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  background: rgba(5, 15, 29, 0.93);
+  overflow-x: auto;
+}
+
+.code-card code {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.8rem;
+  color: #d2e6ff;
+}
+
+.search-array {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
+  gap: 0.45rem;
+}
+
+.search-cell {
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.2rem;
+  text-align: center;
+  background: rgba(17, 31, 53, 0.7);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.search-cell span {
+  display: block;
+  font-weight: 700;
+}
+
+.search-cell small {
+  color: var(--ink-200);
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.search-cell.range {
+  background: rgba(65, 114, 191, 0.45);
+}
+
+.search-cell.mid {
+  transform: translateY(-4px);
+  background: rgba(255, 188, 94, 0.46);
+}
+
+.search-cell.found {
+  background: rgba(72, 242, 203, 0.58);
 }
 
 .success-text {

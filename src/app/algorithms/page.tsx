@@ -41,6 +41,22 @@ const topics = [
     complexity: "O(V + E)",
     example: "Path finding, topological sorting, and cycle detection in graphs.",
   },
+  {
+    name: "Prefix Sums",
+    description: "Preprocessing technique for fast range sum queries.",
+    howItWorks:
+      "Build an auxiliary array where each position stores the cumulative sum up to that index.",
+    complexity: "Build: O(n), Query: O(1)",
+    example: "Frequent BAC exercises with interval sums or counting values in ranges.",
+  },
+  {
+    name: "Two Pointers",
+    description: "Pattern using two indices that move through an array based on conditions.",
+    howItWorks:
+      "Start with pointers at strategic positions and adjust them until a condition is satisfied.",
+    complexity: "Usually O(n)",
+    example: "Pair-sum tasks, sliding windows, and sorted-array optimizations.",
+  },
 ];
 
 export default function AlgorithmsPage() {

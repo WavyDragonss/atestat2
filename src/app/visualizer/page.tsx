@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/PageHero";
+import { SearchVisualizer } from "@/components/SearchVisualizer";
 import { SortingVisualizer } from "@/components/SortingVisualizer";
 
 export default function VisualizerPage() {
@@ -11,6 +12,10 @@ export default function VisualizerPage() {
       />
 
       <SortingVisualizer />
+
+      <section className="stacked-visualizer">
+        <SearchVisualizer />
+      </section>
     </main>
   );
 }

@@ -14,7 +14,8 @@ export default function AboutPage() {
           <h2>Mission</h2>
           <p>
             Many students struggle with algorithm concepts when they only see static code or formulas.
-            AlgoVerse combines explanations, interaction, and animation to make each algorithm feel concrete.
+            AlgoVerse combines explanations, interaction, C++ examples, BAC-style exercises, and animation
+            to make each algorithm feel concrete.
           </p>
         </article>
 
