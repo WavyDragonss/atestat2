@@ -1,27 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { ValidationError, useForm } from "@formspree/react";
 import { PageHero } from "@/components/PageHero";
 
 export default function ContactPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!name.trim() || !email.trim() || !message.trim()) {
-      setSubmitted(false);
-      return;
-    }
-
-    setSubmitted(true);
-    setName("");
-    setEmail("");
-    setMessage("");
-  };
+  const [state, handleSubmit] = useForm("mwvrpzdv");
 
   return (
     <main className="page-shell">
@@ -37,33 +20,43 @@ export default function ContactPage() {
             Nume
             <input
               type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              name="name"
               placeholder="Numele tau"
+              required
             />
           </label>
+
+          <ValidationError prefix="Nume" field="name" errors={state.errors} />
 
           <label>
             Email
             <input
+              id="email"
               type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              name="email"
               placeholder="tu@exemplu.com"
+              required
             />
           </label>
+
+          <ValidationError prefix="Email" field="email" errors={state.errors} />
 
           <label>
             Mesaj
             <textarea
+              id="message"
+              name="message"
               rows={5}
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
               placeholder="Spune-ne ce parere ai..."
+              required
             />
           </label>
 
-          <button type="submit">Trimite mesajul</button>
+          <ValidationError prefix="Mesaj" field="message" errors={state.errors} />
+
+          <button type="submit" disabled={state.submitting}>
+            {state.submitting ? "Se trimite..." : "Trimite mesajul"}
+          </button>
         </form>
 
         <aside className="info-card">
@@ -71,7 +64,7 @@ export default function ContactPage() {
           <p>Care explicatii au fost clare sau confuze.</p>
           <p>Ce algoritmi vrei sa fie vizualizati in continuare.</p>
           <p>Ce imbunatatiri de interfata ar face invatarea mai usoara.</p>
-          {submitted ? <p className="success-text">Multumim pentru feedback!</p> : null}
+          {state.succeeded ? <p className="success-text">Multumim pentru feedback!</p> : null}
         </aside>
       </section>
     </main>
