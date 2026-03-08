@@ -7,7 +7,6 @@ const links = [
   { href: "/", label: "Acasa" },
   { href: "/visualizer", label: "Vizualizator" },
   { href: "/atestate", label: "Atestate" },
-  { href: "/algorithms", label: "Algoritmi" },
   { href: "/bac-problems", label: "Probleme BAC" },
   { href: "/concepts", label: "Concepte" },
   { href: "/about", label: "Despre" },
