@@ -4,33 +4,33 @@ export default function AboutPage() {
   return (
     <main className="page-shell">
       <PageHero
-        eyebrow="About"
-        title="Why This Platform Exists"
-        description="This project transforms abstract algorithm lessons into interactive experiences that are easier to follow and remember."
+        eyebrow="Despre"
+        title="De ce exista aceasta platforma"
+        description="Acest proiect transforma lectiile abstracte de algoritmi in experiente interactive, mai usor de urmarit si retinut."
       />
 
       <section className="about-wrap">
         <article className="info-card">
-          <h2>Mission</h2>
+          <h2>Misiune</h2>
           <p>
-            Many students struggle with algorithm concepts when they only see static code or formulas.
-            AlgoVerse combines explanations, interaction, C++ examples, BAC-style exercises, and animation
-            to make each algorithm feel concrete.
+            Multi elevi se lovesc de dificultati la conceptele de algoritmi cand vad doar cod static sau formule.
+            Wavy's Corner combina explicatii, interactiune, exemple C++, exercitii de tip BAC si animatie
+            pentru a face fiecare algoritm mai concret.
           </p>
         </article>
 
         <article className="info-card">
-          <h2>Technologies</h2>
-          <p>Next.js and React are used for component architecture and page routing.</p>
-          <p>TypeScript ensures safer and more maintainable logic.</p>
-          <p>Modern CSS powers layout, transitions, and visual effects.</p>
+          <h2>Tehnologii</h2>
+          <p>Next.js si React sunt folosite pentru arhitectura pe componente si rutarea paginilor.</p>
+          <p>TypeScript ofera logica mai sigura si mai usor de mentinut.</p>
+          <p>CSS modern sustine layout-ul, tranzitiile si efectele vizuale.</p>
         </article>
 
         <article className="info-card">
-          <h2>Educational Value</h2>
+          <h2>Valoare educationala</h2>
           <p>
-            Beyond learning algorithms, this project builds practical front-end skills: component design,
-            state management, animation patterns, and deployment workflows.
+            Dincolo de invatarea algoritmilor, acest proiect construieste abilitati practice de front-end:
+            design de componente, gestionarea starii, pattern-uri de animatie si fluxuri de deploy.
           </p>
         </article>
       </section>

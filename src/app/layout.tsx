@@ -15,9 +15,9 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AlgoVerse | Interactive Algorithm Learning",
+  title: "Wavy's Corner | Invatare interactiva de algoritmi",
   description:
-    "Learn algorithms through interactive visualizations, clear explanations, and hands-on simulation controls.",
+    "Invata algoritmi prin vizualizari interactive, explicatii clare si controale practice de simulare.",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ro">
       <body className={`${spaceGrotesk.variable} ${jetBrainsMono.variable}`}>
         <div className="site-bg" aria-hidden="true" />
         <Navbar />

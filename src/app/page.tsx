@@ -7,18 +7,18 @@ export default function Home() {
       <section className="home-hero">
         <ParticleCanvas />
         <div className="home-content">
-          <p className="home-eyebrow">Interactive Computer Science</p>
-          <h1>Learn Algorithms by Watching Them Think</h1>
+          <p className="home-eyebrow">Informatica interactiva</p>
+          <h1>Invata algoritmi vazandu-i cum gandesc</h1>
           <p>
-            Turn static theory into motion. Study concepts, run simulations, and understand each step with visual feedback.
+            Transforma teoria statica in miscare. Studiaza concepte, ruleaza simulari si intelege fiecare pas cu feedback vizual.
           </p>
 
           <div className="cta-row">
             <Link href="/visualizer" className="primary-btn">
-              Start Exploring
+              Incepe explorarea
             </Link>
             <Link href="/algorithms" className="ghost-btn">
-              Read Theory
+              Citeste teoria
             </Link>
           </div>
         </div>
@@ -26,16 +26,16 @@ export default function Home() {
 
       <section className="feature-strip">
         <article className="info-card">
-          <h2>Step-by-Step Visuals</h2>
-          <p>See comparisons, swaps, and sorted elements highlighted in real time.</p>
+          <h2>Vizualizare pas cu pas</h2>
+          <p>Vezi comparatiile, interschimbarile si elementele sortate evidentiate in timp real.</p>
         </article>
         <article className="info-card">
           <h2>C++ + BAC Practice</h2>
-          <p>Study C++ implementations and BAC-inspired solved problem patterns in dedicated sections.</p>
+          <p>Studiaza implementari C++ si modele de probleme BAC rezolvate in sectiuni dedicate.</p>
         </article>
         <article className="info-card">
-          <h2>Beyond Basics</h2>
-          <p>Explore search visualizers, complexity insights, and exam-ready algorithm strategies.</p>
+          <h2>Dincolo de baza</h2>
+          <p>Exploreaza vizualizari pentru cautare, intuitii despre complexitate si strategii de algoritmi pentru examen.</p>
         </article>
       </section>
     </main>

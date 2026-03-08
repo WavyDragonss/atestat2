@@ -3,59 +3,59 @@ import { PageHero } from "@/components/PageHero";
 const topics = [
   {
     name: "Bubble Sort",
-    description: "A comparison-based sort that repeatedly swaps adjacent elements when they are in the wrong order.",
+    description: "Un algoritm de sortare bazat pe comparatii care interschimba repetat elementele adiacente cand sunt in ordinea gresita.",
     howItWorks:
-      "The largest unsorted value moves toward the end during each pass. Repeating passes eventually sorts the entire array.",
-    complexity: "Worst Case: O(n^2), Best Case (optimized): O(n)",
-    example: "Useful in teaching because each swap is easy to visualize, even though it is inefficient for large datasets.",
+      "Cea mai mare valoare nesortata se muta spre final la fiecare parcurgere. Repetarea parcurgerilor sorteaza in final intregul tablou.",
+    complexity: "Caz defavorabil: O(n^2), Caz favorabil (optimizat): O(n)",
+    example: "Util la invatare deoarece fiecare interschimbare se poate vizualiza usor, desi este ineficient pentru seturi mari de date.",
   },
   {
     name: "Binary Search",
-    description: "Efficient search algorithm for sorted arrays.",
+    description: "Algoritm eficient de cautare pentru tablouri sortate.",
     howItWorks:
-      "The array is split in half each step. The algorithm keeps only the half that can contain the target value.",
+      "Tabloul se imparte in jumatate la fiecare pas. Algoritmul pastreaza doar jumatatea care poate contine valoarea cautata.",
     complexity: "O(log n)",
-    example: "Finding a word in a dictionary or searching a sorted list of IDs.",
+    example: "Gasirea unui cuvant in dictionar sau cautarea intr-o lista sortata de ID-uri.",
   },
   {
     name: "Recursion",
-    description: "A technique where a function solves a problem by calling itself on smaller subproblems.",
+    description: "O tehnica prin care o functie rezolva o problema apelandu-se pe subprobleme mai mici.",
     howItWorks:
-      "Each recursive call moves toward a base case. Once the base case is reached, results return back through previous calls.",
-    complexity: "Depends on the problem and number of recursive calls.",
-    example: "Computing factorial values, tree traversals, and divide-and-conquer algorithms.",
+      "Fiecare apel recursiv avanseaza spre un caz de baza. Dupa atingerea cazului de baza, rezultatele se intorc prin apelurile anterioare.",
+    complexity: "Depinde de problema si de numarul apelurilor recursive.",
+    example: "Calcul factorial, parcurgeri de arbori si algoritmi divide et impera.",
   },
   {
     name: "Euclidean Algorithm",
-    description: "Calculates the greatest common divisor (GCD) of two numbers.",
+    description: "Calculeaza cel mai mare divizor comun (CMMDC) al doua numere.",
     howItWorks:
-      "Repeatedly replace (a, b) with (b, a mod b) until b becomes 0. The final a is the GCD.",
+      "Inlocuieste repetat (a, b) cu (b, a mod b) pana cand b devine 0. Valoarea finala a este CMMDC-ul.",
     complexity: "O(log(min(a, b)))",
-    example: "Simplifying fractions and number theory problems.",
+    example: "Simplificarea fractiilor si probleme de teorie a numerelor.",
   },
   {
     name: "Depth-First Search (DFS)",
-    description: "A graph traversal strategy that explores deeply before backtracking.",
+    description: "Strategie de parcurgere a grafurilor care exploreaza in adancime inainte de revenire.",
     howItWorks:
-      "Start from one node, visit a neighbor, continue deeper until blocked, then return and explore new branches.",
+      "Porneste dintr-un nod, viziteaza un vecin, continua in adancime pana la blocaj, apoi revine si exploreaza ramuri noi.",
     complexity: "O(V + E)",
-    example: "Path finding, topological sorting, and cycle detection in graphs.",
+    example: "Gasirea drumurilor, sortare topologica si detectarea ciclurilor in grafuri.",
   },
   {
     name: "Prefix Sums",
-    description: "Preprocessing technique for fast range sum queries.",
+    description: "Tehnica de preprocesare pentru interogari rapide de suma pe interval.",
     howItWorks:
-      "Build an auxiliary array where each position stores the cumulative sum up to that index.",
-    complexity: "Build: O(n), Query: O(1)",
-    example: "Frequent BAC exercises with interval sums or counting values in ranges.",
+      "Construieste un tablou auxiliar in care fiecare pozitie stocheaza suma cumulata pana la acel index.",
+    complexity: "Construire: O(n), Interogare: O(1)",
+    example: "Exercitii BAC frecvente cu sume pe intervale sau numarare de valori in intervale.",
   },
   {
     name: "Two Pointers",
-    description: "Pattern using two indices that move through an array based on conditions.",
+    description: "Pattern care foloseste doi indici ce se deplaseaza printr-un tablou in functie de conditii.",
     howItWorks:
-      "Start with pointers at strategic positions and adjust them until a condition is satisfied.",
-    complexity: "Usually O(n)",
-    example: "Pair-sum tasks, sliding windows, and sorted-array optimizations.",
+      "Porneste cu pointerii in pozitii strategice si ajusteaza-i pana cand conditia este satisfacuta.",
+    complexity: "De obicei O(n)",
+    example: "Probleme de tip suma perechi, ferestre glisante si optimizari pe tablouri sortate.",
   },
 ];
 
@@ -63,9 +63,9 @@ export default function AlgorithmsPage() {
   return (
     <main className="page-shell">
       <PageHero
-        eyebrow="Theory"
-        title="Algorithm Explanations"
-        description="Understand core computer science ideas with short, structured theory blocks before moving to the visualizer."
+        eyebrow="Teorie"
+        title="Explicatii de algoritmi"
+        description="Intelege ideile de baza din informatica prin blocuri scurte si clare de teorie, inainte sa treci la vizualizator."
       />
 
       <section className="card-grid">
@@ -73,16 +73,16 @@ export default function AlgorithmsPage() {
           <article key={topic.name} className="info-card">
             <h2>{topic.name}</h2>
             <p>
-              <strong>Description:</strong> {topic.description}
+              <strong>Descriere:</strong> {topic.description}
             </p>
             <p>
-              <strong>How It Works:</strong> {topic.howItWorks}
+              <strong>Cum functioneaza:</strong> {topic.howItWorks}
             </p>
             <p>
-              <strong>Time Complexity:</strong> {topic.complexity}
+              <strong>Complexitate:</strong> {topic.complexity}
             </p>
             <p>
-              <strong>Example:</strong> {topic.example}
+              <strong>Exemplu:</strong> {topic.example}
             </p>
           </article>
         ))}

@@ -2,34 +2,34 @@ import { PageHero } from "@/components/PageHero";
 
 const concepts = [
   {
-    name: "Big-O Complexity",
+    name: "Complexitate Big-O",
     details:
-      "Compares growth rates of algorithms. Helps choose scalable solutions before coding.",
-    tip: "Always estimate complexity from loops and recursion depth before implementation.",
+      "Compara ratele de crestere ale algoritmilor. Ajuta la alegerea solutiilor scalabile inainte de implementare.",
+    tip: "Estimeaza mereu complexitatea din bucle si adancimea recursiei inainte sa scrii cod.",
   },
   {
-    name: "Recursion vs Iteration",
+    name: "Recursie vs iteratie",
     details:
-      "Recursion is expressive but can use more stack memory; iteration is often more memory efficient.",
-    tip: "When recursion depth can become large, convert to iterative approach.",
+      "Recursia este expresiva, dar poate folosi mai multa memorie de stiva; iteratia este adesea mai eficienta.",
+    tip: "Cand adancimea recursiei poate deveni mare, converteste la o abordare iterativa.",
   },
   {
-    name: "Greedy Strategy",
+    name: "Strategie Greedy",
     details:
-      "Builds a solution by repeatedly taking local optimal choices.",
-    tip: "Use it only when you can justify correctness with an invariant or proof idea.",
+      "Construieste solutia alegand repetat optiunea locala optima.",
+    tip: "Foloseste-o doar cand poti justifica corectitudinea printr-un invariant sau o idee de demonstratie.",
   },
   {
-    name: "Dynamic Programming",
+    name: "Programare dinamica",
     details:
-      "Stores intermediate answers to avoid recomputation.",
-    tip: "Define state, transitions, and base cases before writing code.",
+      "Stocheaza rezultate intermediare pentru a evita recalcularile.",
+    tip: "Defineste starea, tranzitiile si cazurile de baza inainte de scrierea codului.",
   },
   {
-    name: "Debugging Competitive Tasks",
+    name: "Debugging la probleme de concurs",
     details:
-      "Most wrong answers come from boundary conditions, not from algorithm choice.",
-    tip: "Test n=1, equal values, sorted data, and max constraints every time.",
+      "Cele mai multe raspunsuri gresite vin din conditii de margine, nu din alegerea algoritmului.",
+    tip: "Testeaza de fiecare data n=1, valori egale, date sortate si restrictii maxime.",
   },
 ];
 
@@ -37,9 +37,9 @@ export default function ConceptsPage() {
   return (
     <main className="page-shell">
       <PageHero
-        eyebrow="Insights"
-        title="Interesting Algorithm Concepts"
-        description="Go beyond code syntax and build strong problem-solving intuition with practical algorithm design principles."
+        eyebrow="Idei"
+        title="Concepte interesante de algoritmica"
+        description="Mergi dincolo de sintaxa si construieste intuitie solida de rezolvare folosind principii practice de proiectare a algoritmilor."
       />
 
       <section className="card-grid">
@@ -48,7 +48,7 @@ export default function ConceptsPage() {
             <h2>{concept.name}</h2>
             <p>{concept.details}</p>
             <p>
-              <strong>Exam Tip:</strong> {concept.tip}
+              <strong>Sfat pentru examen:</strong> {concept.tip}
             </p>
           </article>
         ))}

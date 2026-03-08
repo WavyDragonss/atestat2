@@ -4,14 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Acasa" },
   { href: "/atestate", label: "Atestate" },
-  { href: "/algorithms", label: "Algorithms" },
-  { href: "/cpp-examples", label: "C++ Examples" },
-  { href: "/bac-problems", label: "BAC Problems" },
-  { href: "/visualizer", label: "Visualizer" },
-  { href: "/concepts", label: "Concepts" },
-  { href: "/about", label: "About" },
+  { href: "/algorithms", label: "Algoritmi" },
+  { href: "/cpp-examples", label: "Exemple C++" },
+  { href: "/bac-problems", label: "Probleme BAC" },
+  { href: "/visualizer", label: "Vizualizator" },
+  { href: "/concepts", label: "Concepte" },
+  { href: "/about", label: "Despre" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -22,7 +22,7 @@ export function Navbar() {
     <header className="site-header">
       <nav className="site-nav">
         <Link href="/" className="brand">
-          AlgoVerse
+          Wavy's Corner
         </Link>
 
         <ul className="nav-list">

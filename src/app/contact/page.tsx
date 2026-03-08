@@ -27,19 +27,19 @@ export default function ContactPage() {
     <main className="page-shell">
       <PageHero
         eyebrow="Contact"
-        title="Send Feedback"
-        description="Share ideas, report issues, or suggest algorithms you want to see next in the visualizer."
+        title="Trimite feedback"
+        description="Trimite idei, raporteaza probleme sau sugereaza algoritmi pe care vrei sa ii vezi in vizualizator."
       />
 
       <section className="contact-wrap">
         <form className="contact-form" onSubmit={handleSubmit}>
           <label>
-            Name
+            Nume
             <input
               type="text"
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="Your name"
+              placeholder="Numele tau"
             />
           </label>
 
@@ -49,29 +49,29 @@ export default function ContactPage() {
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
+              placeholder="tu@exemplu.com"
             />
           </label>
 
           <label>
-            Message
+            Mesaj
             <textarea
               rows={5}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
-              placeholder="Tell us what you think..."
+              placeholder="Spune-ne ce parere ai..."
             />
           </label>
 
-          <button type="submit">Send Message</button>
+          <button type="submit">Trimite mesajul</button>
         </form>
 
         <aside className="info-card">
-          <h2>What Feedback Helps Most?</h2>
-          <p>Which explanations felt clear or confusing.</p>
-          <p>Which algorithms you want visualized next.</p>
-          <p>Any UI improvements that would make learning easier.</p>
-          {submitted ? <p className="success-text">Thanks for your feedback!</p> : null}
+          <h2>Ce feedback ajuta cel mai mult?</h2>
+          <p>Care explicatii au fost clare sau confuze.</p>
+          <p>Ce algoritmi vrei sa fie vizualizati in continuare.</p>
+          <p>Ce imbunatatiri de interfata ar face invatarea mai usoara.</p>
+          {submitted ? <p className="success-text">Multumim pentru feedback!</p> : null}
         </aside>
       </section>
     </main>

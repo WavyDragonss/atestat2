@@ -25,7 +25,7 @@ function buildBinarySearchSteps(arr: number[], target: number): SearchStep[] {
       high,
       mid,
       found: arr[mid] === target,
-      note: `Check middle value ${arr[mid]} at index ${mid}`,
+      note: `Verifica valoarea din mijloc ${arr[mid]} la indexul ${mid}`,
     });
 
     if (arr[mid] === target) {
@@ -45,7 +45,7 @@ function buildBinarySearchSteps(arr: number[], target: number): SearchStep[] {
       high: -1,
       mid: -1,
       found: false,
-      note: `Target ${target} not found in array`,
+      note: `Valoarea cautata ${target} nu a fost gasita in tablou`,
     });
   }
 
@@ -88,7 +88,7 @@ export function SearchVisualizer() {
     <section className="visualizer-shell">
       <div className="visualizer-controls">
         <label>
-          Target Value
+          Valoare cautata
           <input
             type="number"
             value={target}
@@ -101,7 +101,7 @@ export function SearchVisualizer() {
             Start
           </button>
           <button type="button" onClick={() => setIsPlaying(false)}>
-            Pause
+            Pauza
           </button>
           <button
             type="button"
@@ -110,7 +110,7 @@ export function SearchVisualizer() {
               setIndex(0);
             }}
           >
-            Reset
+            Resetare
           </button>
           <button
             type="button"
@@ -119,14 +119,14 @@ export function SearchVisualizer() {
               setIndex((prev) => Math.min(prev + 1, steps.length - 1));
             }}
           >
-            Next Step
+            Pasul urmator
           </button>
         </div>
       </div>
 
       <div className="visualizer-meta">
-        <h3>Binary Search Visualizer</h3>
-        <p>Time Complexity: O(log n)</p>
+        <h3>Vizualizator cautare binara</h3>
+        <p>Complexitate: O(log n)</p>
         <p>{current?.note}</p>
       </div>
 

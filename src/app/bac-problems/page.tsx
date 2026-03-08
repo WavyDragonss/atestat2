@@ -2,32 +2,32 @@ import { PageHero } from "@/components/PageHero";
 
 const bacProblems = [
   {
-    title: "BAC Model: Count Prime Numbers",
-    statement: "Given n numbers, count how many are prime.",
+    title: "Model BAC: Numarare numere prime",
+    statement: "Date n numere, determina cate sunt prime.",
     strategy:
-      "For each value, test divisibility up to sqrt(x). Complexity is acceptable for medium constraints.",
-    keyIdeas: ["square root optimization", "modulo arithmetic", "function decomposition"],
+      "Pentru fiecare valoare, testeaza divizibilitatea pana la sqrt(x). Complexitatea este buna pentru restrictii medii.",
+    keyIdeas: ["optimizare cu radical", "aritmetica modulo", "decompozitie in functii"],
   },
   {
-    title: "BAC Model: Longest Increasing Sequence",
-    statement: "Determine the longest strictly increasing contiguous subsequence.",
+    title: "Model BAC: Cea mai lunga secventa crescatoare",
+    statement: "Determina cea mai lunga subsecventa contigua strict crescatoare.",
     strategy:
-      "Use a single pass and keep current length + best length. O(n), no extra memory.",
-    keyIdeas: ["linear scan", "state update", "edge case handling"],
+      "Foloseste o singura parcurgere si retine lungimea curenta + lungimea maxima. O(n), fara memorie suplimentara.",
+    keyIdeas: ["scanare liniara", "actualizare stare", "tratarea cazurilor limita"],
   },
   {
-    title: "BAC Model: Vowel Frequency in String",
-    statement: "Read a text and display each vowel frequency.",
+    title: "Model BAC: Frecventa vocalelor in sir",
+    statement: "Citeste un text si afiseaza frecventa fiecarei vocale.",
     strategy:
-      "Normalize characters to lowercase and update a fixed frequency table.",
-    keyIdeas: ["character processing", "arrays", "input parsing"],
+      "Normalizeaza caracterele la litere mici si actualizeaza un tabel fix de frecvente.",
+    keyIdeas: ["procesare de caractere", "tablouri", "parsarea intrarii"],
   },
   {
-    title: "BAC Model: Matrix Border Sum",
-    statement: "Compute the sum of values located on the matrix border.",
+    title: "Model BAC: Suma de pe conturul matricei",
+    statement: "Calculeaza suma valorilor aflate pe marginea matricei.",
     strategy:
-      "Add first and last rows fully, then only first and last columns for middle rows.",
-    keyIdeas: ["2D arrays", "index boundaries", "avoiding double-count"],
+      "Aduna integral prima si ultima linie, apoi doar prima si ultima coloana pentru liniile din mijloc.",
+    keyIdeas: ["tablouri 2D", "limite de index", "evitarea dublei numarari"],
   },
 ];
 
@@ -36,8 +36,8 @@ export default function BacProblemsPage() {
     <main className="page-shell">
       <PageHero
         eyebrow="BAC"
-        title="Solved BAC-Style Problems"
-        description="Practice Romanian BAC-style algorithmic thinking with concise solved patterns and strategy breakdowns."
+        title="Probleme de tip BAC rezolvate"
+        description="Exerseaza gandirea algoritmica de tip BAC cu modele concise rezolvate si strategii explicate pe pasi."
       />
 
       <section className="card-grid">
@@ -45,13 +45,13 @@ export default function BacProblemsPage() {
           <article className="info-card" key={problem.title}>
             <h2>{problem.title}</h2>
             <p>
-              <strong>Problem:</strong> {problem.statement}
+              <strong>Problema:</strong> {problem.statement}
             </p>
             <p>
-              <strong>Solution Strategy:</strong> {problem.strategy}
+              <strong>Strategie de rezolvare:</strong> {problem.strategy}
             </p>
             <p>
-              <strong>Key Ideas:</strong> {problem.keyIdeas.join(", ")}
+              <strong>Idei cheie:</strong> {problem.keyIdeas.join(", ")}
             </p>
           </article>
         ))}

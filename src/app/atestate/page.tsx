@@ -70,21 +70,20 @@ export default async function AtestatePage() {
           <span className="orb orb-2" />
           <span className="orb orb-3" />
         </div>
-        <p className="page-hero-eyebrow">Portfolio Archive</p>
+        <p className="page-hero-eyebrow">Arhiva portofoliu</p>
         <h1>Atestate</h1>
         <p>
-          A growing archive of all your atestate. Every folder added in <code>public/atestate/</code>
-          appears here automatically with a direct launch button.
+          O arhiva in crestere cu toate atestatele tale. Fiecare folder adaugat in <code>public/atestate/</code>
+          apare aici automat cu buton de lansare directa.
         </p>
       </section>
 
       <section className="archive-grid">
         {atestate.length === 0 ? (
           <article className="archive-card">
-            <h2>No atestate yet</h2>
+            <h2>Nu exista atestate inca</h2>
             <p>
-              Add a new folder in <code>public/atestate/</code> and it will show up here as a launchable
-              entry.
+              Adauga un folder nou in <code>public/atestate/</code> si va aparea aici ca intrare ce poate fi deschisa.
             </p>
           </article>
         ) : (
@@ -95,10 +94,10 @@ export default async function AtestatePage() {
               <p>
                 Folder: <code>{entry.slug}</code>
               </p>
-              <p>{entry.fileCount} files</p>
+              <p>{entry.fileCount} fisiere</p>
               <div className="archive-actions">
                 <Link href={`/atestate/${encodeURIComponent(entry.slug)}/index.html`} className="primary-btn">
-                  Open Atestat
+                  Deschide atestatul
                 </Link>
               </div>
             </article>

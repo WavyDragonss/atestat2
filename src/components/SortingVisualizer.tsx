@@ -19,7 +19,7 @@ function randomArray(size: number): number[] {
 
 function buildBubbleSteps(source: number[]): Step[] {
   const arr = [...source];
-  const steps: Step[] = [{ array: [...arr], active: [], sorted: [], note: "Initial state" }];
+  const steps: Step[] = [{ array: [...arr], active: [], sorted: [], note: "Stare initiala" }];
 
   for (let i = 0; i < arr.length; i += 1) {
     for (let j = 0; j < arr.length - i - 1; j += 1) {
@@ -27,7 +27,7 @@ function buildBubbleSteps(source: number[]): Step[] {
         array: [...arr],
         active: [j, j + 1],
         sorted: Array.from({ length: i }, (_, idx) => arr.length - 1 - idx),
-        note: `Comparing ${arr[j]} and ${arr[j + 1]}`,
+        note: `Comparam ${arr[j]} si ${arr[j + 1]}`,
       });
 
       if (arr[j] > arr[j + 1]) {
@@ -36,7 +36,7 @@ function buildBubbleSteps(source: number[]): Step[] {
           array: [...arr],
           active: [j, j + 1],
           sorted: Array.from({ length: i }, (_, idx) => arr.length - 1 - idx),
-          note: "Swap executed",
+          note: "Interschimbare executata",
         });
       }
     }
@@ -46,7 +46,7 @@ function buildBubbleSteps(source: number[]): Step[] {
     array: [...arr],
     active: [],
     sorted: Array.from({ length: arr.length }, (_, idx) => idx),
-    note: "Array sorted",
+    note: "Tablou sortat",
   });
 
   return steps;
@@ -54,7 +54,7 @@ function buildBubbleSteps(source: number[]): Step[] {
 
 function buildSelectionSteps(source: number[]): Step[] {
   const arr = [...source];
-  const steps: Step[] = [{ array: [...arr], active: [], sorted: [], note: "Initial state" }];
+  const steps: Step[] = [{ array: [...arr], active: [], sorted: [], note: "Stare initiala" }];
 
   for (let i = 0; i < arr.length; i += 1) {
     let min = i;
@@ -64,7 +64,7 @@ function buildSelectionSteps(source: number[]): Step[] {
         array: [...arr],
         active: [min, j],
         sorted: Array.from({ length: i }, (_, idx) => idx),
-        note: `Searching minimum from index ${i}`,
+        note: `Cautam minimul de la indexul ${i}`,
       });
 
       if (arr[j] < arr[min]) {
@@ -78,7 +78,7 @@ function buildSelectionSteps(source: number[]): Step[] {
         array: [...arr],
         active: [i, min],
         sorted: Array.from({ length: i }, (_, idx) => idx),
-        note: "Placed new minimum",
+        note: "Minimul nou a fost plasat",
       });
     }
   }
@@ -87,7 +87,7 @@ function buildSelectionSteps(source: number[]): Step[] {
     array: [...arr],
     active: [],
     sorted: Array.from({ length: arr.length }, (_, idx) => idx),
-    note: "Array sorted",
+    note: "Tablou sortat",
   });
 
   return steps;
@@ -95,7 +95,7 @@ function buildSelectionSteps(source: number[]): Step[] {
 
 function buildInsertionSteps(source: number[]): Step[] {
   const arr = [...source];
-  const steps: Step[] = [{ array: [...arr], active: [], sorted: [0], note: "Initial state" }];
+  const steps: Step[] = [{ array: [...arr], active: [], sorted: [0], note: "Stare initiala" }];
 
   for (let i = 1; i < arr.length; i += 1) {
     const key = arr[i];
@@ -105,7 +105,7 @@ function buildInsertionSteps(source: number[]): Step[] {
       array: [...arr],
       active: [i],
       sorted: Array.from({ length: i }, (_, idx) => idx),
-      note: `Insert value ${key}`,
+      note: `Inseram valoarea ${key}`,
     });
 
     while (j >= 0 && arr[j] > key) {
@@ -114,7 +114,7 @@ function buildInsertionSteps(source: number[]): Step[] {
         array: [...arr],
         active: [j, j + 1],
         sorted: Array.from({ length: i }, (_, idx) => idx),
-        note: "Shift right",
+        note: "Deplasare la dreapta",
       });
       j -= 1;
     }
@@ -124,7 +124,7 @@ function buildInsertionSteps(source: number[]): Step[] {
       array: [...arr],
       active: [j + 1],
       sorted: Array.from({ length: i + 1 }, (_, idx) => idx),
-      note: "Key inserted",
+      note: "Valoare inserata",
     });
   }
 
@@ -132,7 +132,7 @@ function buildInsertionSteps(source: number[]): Step[] {
     array: [...arr],
     active: [],
     sorted: Array.from({ length: arr.length }, (_, idx) => idx),
-    note: "Array sorted",
+    note: "Tablou sortat",
   });
 
   return steps;
@@ -145,9 +145,9 @@ function buildSteps(algorithm: AlgorithmId, source: number[]): Step[] {
 }
 
 const ALGORITHM_INFO: Record<AlgorithmId, { name: string; complexity: string }> = {
-  bubble: { name: "Bubble Sort", complexity: "O(n^2)" },
-  selection: { name: "Selection Sort", complexity: "O(n^2)" },
-  insertion: { name: "Insertion Sort", complexity: "O(n^2)" },
+  bubble: { name: "Sortare prin bule", complexity: "O(n^2)" },
+  selection: { name: "Sortare prin selectie", complexity: "O(n^2)" },
+  insertion: { name: "Sortare prin insertie", complexity: "O(n^2)" },
 };
 
 export function SortingVisualizer() {
@@ -192,7 +192,7 @@ export function SortingVisualizer() {
         array: seed,
         active: [],
         sorted: [],
-        note: "Ready",
+        note: "Pregatit",
       }
     );
   }, [seed, stepIndex, steps]);
@@ -223,19 +223,19 @@ export function SortingVisualizer() {
     <section className="visualizer-shell">
       <div className="visualizer-controls">
         <label>
-          Algorithm
+          Algoritm
           <select
             value={algorithm}
             onChange={(event) => setAlgorithm(event.target.value as AlgorithmId)}
           >
-            <option value="bubble">Bubble Sort</option>
-            <option value="selection">Selection Sort</option>
-            <option value="insertion">Insertion Sort</option>
+            <option value="bubble">Sortare prin bule</option>
+            <option value="selection">Sortare prin selectie</option>
+            <option value="insertion">Sortare prin insertie</option>
           </select>
         </label>
 
         <label>
-          Speed
+          Viteza
           <input
             type="range"
             min={1}
@@ -247,19 +247,19 @@ export function SortingVisualizer() {
 
         <div className="button-row">
           <button type="button" onClick={start}>Start</button>
-          <button type="button" onClick={pause}>Pause</button>
-          <button type="button" onClick={reset}>Reset</button>
-          <button type="button" onClick={randomize}>Randomize</button>
+          <button type="button" onClick={pause}>Pauza</button>
+          <button type="button" onClick={reset}>Resetare</button>
+          <button type="button" onClick={randomize}>Aleator</button>
         </div>
       </div>
 
       <div className="visualizer-meta">
         <h3>{ALGORITHM_INFO[algorithm].name}</h3>
-        <p>Time Complexity: {ALGORITHM_INFO[algorithm].complexity}</p>
+        <p>Complexitate: {ALGORITHM_INFO[algorithm].complexity}</p>
         <p>{current.note}</p>
       </div>
 
-      <div className="bars-wrap" role="img" aria-label="Sorting bars visualization">
+      <div className="bars-wrap" role="img" aria-label="Vizualizare bare pentru sortare">
         {current.array.map((value, index) => {
           const active = current.active.includes(index);
           const sorted = current.sorted.includes(index);

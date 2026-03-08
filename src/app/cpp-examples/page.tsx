@@ -4,7 +4,7 @@ const examples = [
   {
     title: "Bubble Sort in C++",
     explanation:
-      "Classic in-place sorting algorithm useful for understanding adjacent swaps and nested loops.",
+      "Algoritm clasic de sortare in-place, util pentru intelegerea interschimbarilor adiacente si a buclelor imbricate.",
     code: `#include <bits/stdc++.h>
 using namespace std;
 
@@ -22,7 +22,7 @@ int main() {
   {
     title: "Binary Search in C++",
     explanation:
-      "Efficient search for sorted arrays. The interval is halved every iteration.",
+      "Cautare eficienta in tablouri sortate. Intervalul se injumatateste la fiecare iteratie.",
     code: `#include <bits/stdc++.h>
 using namespace std;
 
@@ -40,7 +40,7 @@ int binarySearch(const vector<int>& v, int target) {
   {
     title: "Euclidean Algorithm (GCD)",
     explanation:
-      "A fundamental BAC topic and one of the fastest ways to compute greatest common divisor.",
+      "Tema fundamentala pentru BAC si una dintre cele mai rapide metode de calcul al CMMDC.",
     code: `#include <bits/stdc++.h>
 using namespace std;
 
@@ -56,7 +56,7 @@ int gcdEuclid(int a, int b) {
   {
     title: "Backtracking Skeleton",
     explanation:
-      "General template useful for BAC-style combinatorics and generate-all solutions tasks.",
+      "Sablon general util pentru combinatorica de tip BAC si pentru probleme de generare a tuturor solutiilor.",
     code: `#include <bits/stdc++.h>
 using namespace std;
 
@@ -84,8 +84,8 @@ export default function CppExamplesPage() {
     <main className="page-shell">
       <PageHero
         eyebrow="C++"
-        title="C++ Algorithm Code Examples"
-        description="Study practical C++ implementations with short explanations, then compare each one with its animated visual behavior."
+        title="Exemple de cod C++ pentru algoritmi"
+        description="Studiaza implementari C++ practice cu explicatii scurte, apoi compara-le cu comportamentul lor animat."
       />
 
       <section className="card-grid">

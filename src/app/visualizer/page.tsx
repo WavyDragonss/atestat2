@@ -6,9 +6,9 @@ export default function VisualizerPage() {
   return (
     <main className="page-shell">
       <PageHero
-        eyebrow="Practice"
-        title="Algorithm Visualizer"
-        description="Run sorting algorithms step by step, control speed, and observe how each comparison and swap transforms the array."
+        eyebrow="Practica"
+        title="Vizualizator de algoritmi"
+        description="Ruleaza algoritmi de sortare pas cu pas, controleaza viteza si observa cum fiecare comparatie si interschimbare transforma tabloul."
       />
 
       <SortingVisualizer />

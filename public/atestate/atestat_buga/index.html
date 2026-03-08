@@ -7,37 +7,62 @@
 <link href="style.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
 </head>
-<body>
+<body class="landing-page">
   <header role="banner" class="site-header">
     <div class="container header-container">
+      <p class="header-kicker">Atestat interactiv</p>
       <h1>Proiect de Chimie</h1>
+      <p class="header-subtitle">Invata rapid conceptele de baza prin lectii scurte, video-uri si exemple clare.</p>
     </div>
   </header>
+
   <main class="container" role="main">
+    <section class="hero-panel" aria-label="Introducere">
+      <div>
+        <p class="hero-tag">Bine ai venit</p>
+        <h2>Exploreaza chimia intr-un format modern</h2>
+        <p>
+          Aceasta pagina este centrul proiectului. Alege o tema, urmareste explicatia si construieste-ti o baza solida pentru evaluare.
+        </p>
+      </div>
+      <div class="hero-stats" aria-hidden="true">
+        <div class="stat">
+          <span>15</span>
+          <small>teme principale</small>
+        </div>
+        <div class="stat">
+          <span>1</span>
+          <small>formular feedback</small>
+        </div>
+      </div>
+    </section>
+
     <section aria-labelledby="index-title" class="section">
       <h2 id="index-title" class="section-title">Teme</h2>
       <div class="grid" role="list">
-        <div class="card"  ><a href="Introduction to Chemistry/page1-introduction.html">Introducere in Chimie</a></div>
-        <div class="card"  ><a href="Atomic Structure/page3-atomic-structure.html">Structura Atomica</a></div>
-        <div class="card"  ><a href="Chemical Bonds/page5-chemical-bonds.html">Legaturi Chimice</a></div>
-        <div class="card"  ><a href="Chemical Equilibrium/page13-chemical-equilibrium.html">Echilibru Chimic</a></div>
-        <div class="card"  ><a href="Chemical Kinetics/page12-chemical-kinetics.html">Cinetica Chimica</a></div>
-        <div class="card"  ><a href="Chemical Reactions/page8-chemical-reactions.html">Reactii Chimice</a></div>
-        <div class="card"  ><a href="Environmental Chemistry/page15-environmental-chemistry.html">Chimia Mediului</a></div>
-        <div class="card"  ><a href="Gases/page9-gases.html">Gaze</a></div>
-        <div class="card"  ><a href="History of Chemistry/page2-history.html">Istoria Chimiei</a></div>
-        <div class="card"  ><a href="Acids and Bases/page7-acids-bases.html">Acizi si Baze</a></div>
-        <div class="card"  ><a href="Organic Chemistry Basics/page14-organic-chemistry.html">Bazele Chimiei Organice</a></div>
-        <div class="card"  ><a href="Periodic Table/page4-periodic-table.html">Tabelul Periodic</a></div>
-        <div class="card"  ><a href="States of Matter/page6-states-of-matter.html">Stari de Agregare</a></div>
-        <div class="card"  ><a href="Stoichiometry/page10-stoichiometry.html">Stoichiometrie</a></div>
-        <div class="card"  ><a href="Thermochemistry/page11-thermochemistry.html">Termochimie</a></div>
+        <a class="card" href="Introduction to Chemistry/page1-introduction.html"><span>Introducere in Chimie</span><small>Deschide tema</small></a>
+        <a class="card" href="Atomic Structure/page3-atomic-structure.html"><span>Structura Atomica</span><small>Deschide tema</small></a>
+        <a class="card" href="Chemical Bonds/page5-chemical-bonds.html"><span>Legaturi Chimice</span><small>Deschide tema</small></a>
+        <a class="card" href="Chemical Equilibrium/page13-chemical-equilibrium.html"><span>Echilibru Chimic</span><small>Deschide tema</small></a>
+        <a class="card" href="Chemical Kinetics/page12-chemical-kinetics.html"><span>Cinetica Chimica</span><small>Deschide tema</small></a>
+        <a class="card" href="Chemical Reactions/page8-chemical-reactions.html"><span>Reactii Chimice</span><small>Deschide tema</small></a>
+        <a class="card" href="Environmental Chemistry/page15-environmental-chemistry.html"><span>Chimia Mediului</span><small>Deschide tema</small></a>
+        <a class="card" href="Gases/page9-gases.html"><span>Gaze</span><small>Deschide tema</small></a>
+        <a class="card" href="History of Chemistry/page2-history.html"><span>Istoria Chimiei</span><small>Deschide tema</small></a>
+        <a class="card" href="Acids and Bases/page7-acids-bases.html"><span>Acizi si Baze</span><small>Deschide tema</small></a>
+        <a class="card" href="Organic Chemistry Basics/page14-organic-chemistry.html"><span>Bazele Chimiei Organice</span><small>Deschide tema</small></a>
+        <a class="card" href="Periodic Table/page4-periodic-table.html"><span>Tabelul Periodic</span><small>Deschide tema</small></a>
+        <a class="card" href="States of Matter/page6-states-of-matter.html"><span>Stari de Agregare</span><small>Deschide tema</small></a>
+        <a class="card" href="Stoichiometry/page10-stoichiometry.html"><span>Stoichiometrie</span><small>Deschide tema</small></a>
+        <a class="card" href="Thermochemistry/page11-thermochemistry.html"><span>Termochimie</span><small>Deschide tema</small></a>
       </div>
     </section>
+
     <section aria-labelledby="formular-title" class="section">
       <h2 id="formular-title" class="section-title">Pareri</h2>
-      <div class="grid" role="list">
-        <div class="card"  ><a href="Formular/formular.html">Apasa aici</a></div>
+      <div class="feedback-panel">
+        <p>Spune ce ti-a placut si ce ai vrea sa imbunatatim in proiect.</p>
+        <a class="feedback-btn" href="Formular/formular.html">Deschide formularul de feedback</a>
       </div>
     </section>
   </main>
