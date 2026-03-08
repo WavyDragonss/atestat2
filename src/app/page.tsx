@@ -17,9 +17,6 @@ export default function Home() {
             <Link href="/visualizer" className="primary-btn">
               Incepe explorarea
             </Link>
-            <Link href="/concepts" className="ghost-btn">
-              Vezi conceptele
-            </Link>
           </div>
         </div>
       </section>
