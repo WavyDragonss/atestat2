@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Merriweather:wght@300;400;700&display=swap');
+
+:root {
+  --bg-main: #f7f2e8;
+  --bg-soft: #efe5d1;
+  --text-main: #2b2623;
+  --text-muted: #5a4f49;
+  --accent: #7a1f1f;
+  --accent-dark: #541515;
+  --border: #d8ccb8;
+  --shadow: 0 10px 24px rgba(38, 26, 20, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Merriweather', Georgia, serif;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(166, 125, 89, 0.18) 0, transparent 42%),
+    radial-gradient(circle at 100% 100%, rgba(122, 31, 31, 0.08) 0, transparent 46%),
+    var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.7;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+body.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(247, 242, 232, 0.94);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  gap: 1rem;
+}
+
+.brand {
+  margin: 0;
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-dark);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+nav a {
+  display: inline-block;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background-color: var(--bg-soft);
+  color: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+nav a.active {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.2rem 1rem 3rem;
+}
+
+.hero {
+  background: linear-gradient(130deg, rgba(122, 31, 31, 0.12), rgba(255, 255, 255, 0.64));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hero img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-content {
+  padding: 1.35rem 1.2rem 1.6rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  line-height: 1.25;
+  margin-top: 0;
+  color: var(--accent-dark);
+  text-wrap: balance;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 1rem;
+}
+
+.page-intro {
+  max-width: 780px;
+  margin: 0 auto 1.3rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.grid-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.button-link {
+  text-decoration: none;
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 0.75rem 0.95rem;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: transform 220ms ease, background-color 220ms ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
+.section-card {
+  background: #fffefb;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1.2rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.fact-list {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.fact-list li {
+  margin-bottom: 0.6rem;
+}
+
+.conclusion {
+  margin-top: 2.3rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  padding: 1.4rem 1rem 2rem;
+}
+
+@media (max-width: 760px) {
+  .nav-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    width: 100%;
+  }
+
+  nav li {
+    flex: 1;
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+}

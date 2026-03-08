@@ -417,6 +417,104 @@ textarea {
   margin: 0.4rem 0;
 }
 
+.archive-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+  background: linear-gradient(140deg, rgba(8, 24, 45, 0.9), rgba(13, 37, 63, 0.72));
+}
+
+.archive-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.5;
+  animation: drift 9s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 180px;
+  height: 180px;
+  top: -50px;
+  left: 10%;
+  background: radial-gradient(circle, rgba(85, 216, 255, 0.45), transparent 70%);
+}
+
+.orb-2 {
+  width: 210px;
+  height: 210px;
+  right: 8%;
+  top: 24%;
+  background: radial-gradient(circle, rgba(72, 242, 203, 0.42), transparent 70%);
+  animation-delay: 1.2s;
+}
+
+.orb-3 {
+  width: 220px;
+  height: 220px;
+  left: 34%;
+  bottom: -95px;
+  background: radial-gradient(circle, rgba(255, 204, 102, 0.4), transparent 70%);
+  animation-delay: 2.4s;
+}
+
+.archive-hero h1,
+.archive-hero p,
+.archive-hero .page-hero-eyebrow {
+  position: relative;
+  z-index: 1;
+}
+
+.archive-grid {
+  margin-top: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.archive-card {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: linear-gradient(150deg, rgba(16, 30, 51, 0.92), rgba(8, 19, 35, 0.82));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  animation: fade-up 700ms ease both;
+}
+
+.archive-card h2 {
+  margin-bottom: 0.55rem;
+}
+
+.archive-card p {
+  margin: 0.35rem 0;
+  color: var(--ink-200);
+}
+
+.archive-tag {
+  display: inline-block;
+  margin: 0;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #03253f;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+}
+
+.archive-actions {
+  margin-top: 0.8rem;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -425,6 +523,18 @@ textarea {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
