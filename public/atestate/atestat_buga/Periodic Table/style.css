@@ -1,0 +1,99 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(rgba(25, 50, 70, 0.85), rgba(10, 25, 40, 0.95)),
+    url('https://images.pexels.com/photos/264630/pexels-photo-264630.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+  background-size: cover;
+  color: #e8f0f8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.periodic-container {
+  background-color: rgba(15, 35, 55, 0.9);
+  max-width: 900px;
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(50, 90, 130, 0.8);
+  animation: fadeInZoom 1.5s ease forwards;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3.2rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  color: #a3c1ff;
+  text-shadow: 0 0 15px #5680f9;
+}
+
+.back-link {
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #a3c1ff;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  display: inline-block;
+  margin-top: 15px;
+}
+.back-link:hover {
+  border-bottom: 2px solid #a3c1ff;
+}
+
+h2 {
+  color: #8bb7ff;
+  border-bottom: 3px solid #5680f9;
+  padding-bottom: 7px;
+  margin-top: 35px;
+  margin-bottom: 26px;
+  font-weight: 700;
+}
+
+.intro p {
+  font-size: 1.25rem;
+  line-height: 1.75;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.image-section img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 28px auto;
+  border-radius: 18px;
+  box-shadow: 0 0 40px #5680f9cc;
+}
+
+.video-section iframe {
+  display: block;
+  margin: 32px auto;
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  border-radius: 16px;
+  box-shadow: 0 0 38px #5680f9aa;
+}
+
+/* Animations */
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

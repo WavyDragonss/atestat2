@@ -1,0 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(rgba(50, 20, 0, 0.75), rgba(20, 5, 0, 0.85)),
+    url('https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff6e6;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 100vh;
+}
+
+.thermo-container {
+  background-color: rgba(40, 20, 5, 0.85);
+  padding: 50px 60px;
+  border-radius: 20px;
+  max-width: 900px;
+  box-shadow: 0 0 60px #f7a540cc;
+  animation: glowFadeIn 1.6s ease forwards;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffb347;
+  text-shadow: 0 0 18px #f7941e;
+}
+
+.back-link {
+  color: #ffb347;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  margin-top: 15px;
+  display: inline-block;
+}
+.back-link:hover {
+  border-bottom: 2px solid #ffb347;
+}
+
+h2 {
+  color: #ffcc80;
+  border-bottom: 3px solid #f7a540;
+  padding-bottom: 6px;
+  margin-top: 30px;
+  margin-bottom: 24px;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #ffe9c4;
+}
+
+.video-section iframe {
+  display: block;
+  margin: 0 auto 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  box-shadow: 0 0 40px #f7a540cc;
+}
+
+.key-points ul {
+  font-size: 1.15rem;
+  padding-left: 28px;
+  color: #ffdf9a;
+}
+
+.key-points li {
+  margin-bottom: 14px;
+}
+
+/* Animations */
+@keyframes glowFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

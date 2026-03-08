@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formular de feedback</title>
+  <link href="style.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="form-container">
+    <h1>Formular de feedback</h1>
+    <form id="feedbackForm">
+      <label for="name">Nume:</label>
+      <input type="text" id="name" name="name" placeholder="Scrie numele tau" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Scrie emailul tau" required />
+
+      <label for="password">Parola:</label>
+      <input type="password" id="password" name="password" placeholder="Scrie parola ta" required />
+
+      <label for="opinion">Parerea ta:</label>
+      <textarea id="opinion" name="opinion" rows="5" placeholder="Scrie parerea ta aici..." required></textarea>
+
+      <button type="submit">Trimite</button>
+    </form>
+
+    <a href="../index.html" class="back-link">← Inapoi la Teme</a>
+  </div>
+
+  <!-- Scriptul JavaScript -->
+  <script src="formular.js"></script>
+</body>
+</html>
