@@ -8,7 +8,7 @@ export default function VisualizerPage() {
       <PageHero
         eyebrow="Practica"
         title="Vizualizator de algoritmi"
-        description="Ruleaza algoritmi de sortare pas cu pas, controleaza viteza si observa cum fiecare comparatie si interschimbare transforma tabloul."
+        description="Ruleaza algoritmi de sortare pas cu pas, controleaza viteza si vezi instant codul C++ asociat fiecarui algoritm selectat."
       />
 
       <SortingVisualizer />

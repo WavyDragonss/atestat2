@@ -150,6 +150,92 @@ const ALGORITHM_INFO: Record<AlgorithmId, { name: string; complexity: string }> 
   insertion: { name: "Sortare prin insertie", complexity: "O(n^2)" },
 };
 
+const ALGORITHM_CPP_CODE: Record<AlgorithmId, string> = {
+  bubble: `#include <iostream>
+using namespace std;
+
+void bubbleSort(int a[], int n) {
+  for (int i = 0; i < n - 1; i++) {
+    for (int j = 0; j < n - i - 1; j++) {
+      if (a[j] > a[j + 1]) {
+        int temp = a[j];
+        a[j] = a[j + 1];
+        a[j + 1] = temp;
+      }
+    }
+  }
+}
+
+int main() {
+  int a[] = {5, 1, 4, 2, 8};
+  int n = sizeof(a) / sizeof(a[0]);
+
+  bubbleSort(a, n);
+
+  for (int i = 0; i < n; i++) {
+    cout << a[i] << " ";
+  }
+  return 0;
+}`,
+  selection: `#include <iostream>
+using namespace std;
+
+void selectionSort(int a[], int n) {
+  for (int i = 0; i < n - 1; i++) {
+    int minIndex = i;
+
+    for (int j = i + 1; j < n; j++) {
+      if (a[j] < a[minIndex]) {
+        minIndex = j;
+      }
+    }
+
+    int temp = a[i];
+    a[i] = a[minIndex];
+    a[minIndex] = temp;
+  }
+}
+
+int main() {
+  int a[] = {64, 25, 12, 22, 11};
+  int n = sizeof(a) / sizeof(a[0]);
+
+  selectionSort(a, n);
+
+  for (int i = 0; i < n; i++) {
+    cout << a[i] << " ";
+  }
+  return 0;
+}`,
+  insertion: `#include <iostream>
+using namespace std;
+
+void insertionSort(int a[], int n) {
+  for (int i = 1; i < n; i++) {
+    int key = a[i];
+    int j = i - 1;
+
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      j--;
+    }
+    a[j + 1] = key;
+  }
+}
+
+int main() {
+  int a[] = {9, 5, 1, 4, 3};
+  int n = sizeof(a) / sizeof(a[0]);
+
+  insertionSort(a, n);
+
+  for (int i = 0; i < n; i++) {
+    cout << a[i] << " ";
+  }
+  return 0;
+}`,
+};
+
 export function SortingVisualizer() {
   const [algorithm, setAlgorithm] = useState<AlgorithmId>("bubble");
   const [seed, setSeed] = useState<number[]>(() => randomArray(BAR_COUNT));
@@ -275,6 +361,14 @@ export function SortingVisualizer() {
           );
         })}
       </div>
+
+      <article className="info-card code-card" style={{ marginTop: "1rem" }}>
+        <h3>Exemplu C++ pentru algoritmul selectat</h3>
+        <p>Cod simplu, structural, folosind doar biblioteca <code>&lt;iostream&gt;</code>.</p>
+        <pre>
+          <code>{ALGORITHM_CPP_CODE[algorithm]}</code>
+        </pre>
+      </article>
     </section>
   );
 }
