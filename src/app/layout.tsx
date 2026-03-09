@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: "Wavy's Corner | Invatare interactiva de algoritmi",
   description:
     "Invata algoritmi prin vizualizari interactive, explicatii clare si controale practice de simulare.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
