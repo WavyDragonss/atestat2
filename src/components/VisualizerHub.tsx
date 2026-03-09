@@ -33,7 +33,7 @@ const CATEGORIES: VisualizerCategory[] = [
   {
     id: "backtracking",
     label: "Backtracking",
-    summary: "Vezi cum se construieste solutia si unde are loc revenirea.",
+    summary: "Concept BAC: solutia se construieste pas cu pas, iar cand o alegere nu e valida, revenim si incercam alta varianta.",
   },
   {
     id: "graphs",

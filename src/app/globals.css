@@ -340,6 +340,62 @@ textarea {
   background: rgba(13, 31, 56, 0.66);
 }
 
+.bt-vector {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.bt-slot {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.7rem;
+  background: rgba(16, 33, 57, 0.74);
+  text-align: center;
+}
+
+.bt-slot.active {
+  border-color: rgba(255, 201, 94, 0.7);
+  background: rgba(255, 188, 94, 0.18);
+}
+
+.bt-slot-label {
+  display: block;
+  color: var(--ink-200);
+  font-size: 0.78rem;
+  margin-bottom: 0.25rem;
+}
+
+.bt-slot strong {
+  font-size: 1.3rem;
+}
+
+.bt-log {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.bt-log p {
+  margin: 0;
+  color: var(--ink-200);
+}
+
+.bt-results-grid {
+  margin-top: 0.65rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.bt-results-grid code {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.24rem 0.55rem;
+  background: rgba(17, 37, 66, 0.8);
+  color: #d2e6ff;
+}
+
 .bt-board {
   margin-top: 1rem;
   display: grid;
