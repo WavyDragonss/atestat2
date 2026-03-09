@@ -145,7 +145,7 @@ function buildSteps(algorithm: AlgorithmId, source: number[]): Step[] {
 }
 
 const ALGORITHM_INFO: Record<AlgorithmId, { name: string; complexity: string }> = {
-  bubble: { name: "Sortare prin bule", complexity: "O(n^2)" },
+  bubble: { name: "Bubble sort (regula celor 3 pahare)", complexity: "O(n^2)" },
   selection: { name: "Sortare prin selectie", complexity: "O(n^2)" },
   insertion: { name: "Sortare prin insertie", complexity: "O(n^2)" },
 };
@@ -314,7 +314,7 @@ export function SortingVisualizer() {
             value={algorithm}
             onChange={(event) => setAlgorithm(event.target.value as AlgorithmId)}
           >
-            <option value="bubble">Sortare prin bule</option>
+            <option value="bubble">Bubble Sort</option>
             <option value="selection">Sortare prin selectie</option>
             <option value="insertion">Sortare prin insertie</option>
           </select>

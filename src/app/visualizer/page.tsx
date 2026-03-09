@@ -1,6 +1,5 @@
 import { PageHero } from "@/components/PageHero";
-import { SearchVisualizer } from "@/components/SearchVisualizer";
-import { SortingVisualizer } from "@/components/SortingVisualizer";
+import { VisualizerHub } from "@/components/VisualizerHub";
 
 export default function VisualizerPage() {
   return (
@@ -8,14 +7,10 @@ export default function VisualizerPage() {
       <PageHero
         eyebrow="Practica"
         title="Vizualizator de algoritmi"
-        description="Ruleaza algoritmi de sortare pas cu pas, controleaza viteza si vezi instant codul C++ asociat fiecarui algoritm selectat."
+        description="Exploreaza categorii de algoritmi: sortare, cautare binara, backtracking cu calculator interactiv si sectiuni noi pregatite pentru extindere."
       />
 
-      <SortingVisualizer />
-
-      <section className="stacked-visualizer">
-        <SearchVisualizer />
-      </section>
+      <VisualizerHub />
     </main>
   );
 }

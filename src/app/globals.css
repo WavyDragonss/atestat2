@@ -297,6 +297,77 @@ textarea {
   margin-top: 1rem;
 }
 
+.visualizer-hub {
+  display: grid;
+  gap: 1rem;
+}
+
+.visualizer-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.category-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.48rem 0.9rem;
+  background: rgba(16, 35, 61, 0.92);
+  color: var(--ink-200);
+}
+
+.category-chip.active {
+  color: #062131;
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+}
+
+.category-summary h3 {
+  margin-bottom: 0.55rem;
+}
+
+.bt-metrics {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.6rem;
+}
+
+.bt-metrics p {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.7rem;
+  background: rgba(13, 31, 56, 0.66);
+}
+
+.bt-board {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.bt-cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 0.35rem;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
+}
+
+.bt-cell.light {
+  background: rgba(194, 215, 245, 0.15);
+}
+
+.bt-cell.dark {
+  background: rgba(78, 120, 187, 0.42);
+}
+
+.bt-cell.queen {
+  color: #062131;
+  background: linear-gradient(140deg, #ffd887, #ffaf5f);
+}
+
 .bar-slot {
   display: flex;
   flex-direction: column;
@@ -552,6 +623,11 @@ textarea {
   .site-nav {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .category-chip {
+    width: 100%;
+    text-align: left;
   }
 
   .bars-wrap {
