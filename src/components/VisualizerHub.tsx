@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { BacktrackingVisualizer } from "@/components/BacktrackingVisualizer";
+import { GraphVisualizer } from "@/components/GraphVisualizer";
 import { SearchVisualizer } from "@/components/SearchVisualizer";
 import { SortingVisualizer } from "@/components/SortingVisualizer";
 
@@ -38,7 +39,7 @@ const CATEGORIES: VisualizerCategory[] = [
   {
     id: "graphs",
     label: "Grafuri",
-    summary: "BFS, DFS si drum minim (in pregatire).",
+    summary: "Construiesti propriul graf si rulezi BFS/DFS interactiv, pas cu pas.",
   },
   {
     id: "dynamic-programming",
@@ -100,12 +101,7 @@ export function VisualizerHub() {
       {activeCategory === "sorting" && <SortingVisualizer />}
       {activeCategory === "binary-search" && <SearchVisualizer />}
       {activeCategory === "backtracking" && <BacktrackingVisualizer />}
-      {activeCategory === "graphs" && (
-        <UpcomingCard
-          title="Vizualizator algoritmi pe grafuri"
-          description="In pasul urmator putem adauga BFS/DFS si Dijkstra cu animatie de muchii si noduri."
-        />
-      )}
+      {activeCategory === "graphs" && <GraphVisualizer />}
       {activeCategory === "dynamic-programming" && (
         <UpcomingCard
           title="Vizualizator programare dinamica"

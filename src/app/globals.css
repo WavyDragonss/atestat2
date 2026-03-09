@@ -396,6 +396,46 @@ textarea {
   color: #d2e6ff;
 }
 
+.graph-canvas-wrap {
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 0.8rem;
+  background: rgba(8, 22, 42, 0.72);
+}
+
+.graph-canvas {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+  margin: 0 auto;
+}
+
+.graph-edge {
+  stroke: rgba(157, 188, 245, 0.62);
+  stroke-width: 2;
+}
+
+.graph-node {
+  fill: rgba(46, 87, 145, 0.88);
+  stroke: rgba(171, 198, 255, 0.55);
+  stroke-width: 2;
+}
+
+.graph-node.visited {
+  fill: rgba(72, 242, 203, 0.78);
+}
+
+.graph-node.current {
+  fill: rgba(255, 196, 102, 0.94);
+}
+
+.graph-node-label {
+  fill: #062131;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .bt-board {
   margin-top: 1rem;
   display: grid;
