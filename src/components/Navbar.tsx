@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 const links = [
   { href: "/", label: "Acasa" },
   { href: "/visualizer", label: "Vizualizator" },
+  { href: "/pseudocode-compiler", label: "Compilator PC" },
+  { href: "/pseudocode-guide", label: "Ghid PC" },
   { href: "/atestate", label: "Atestate" },
   { href: "/bac-problems", label: "Probleme BAC" },
   { href: "/about", label: "Despre" },

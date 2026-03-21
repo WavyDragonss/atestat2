@@ -682,6 +682,79 @@ textarea {
   margin-top: 0.8rem;
 }
 
+.pseudo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pseudo-panel {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.pseudo-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.pseudo-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink-200);
+  font-size: 0.9rem;
+}
+
+.pseudo-toggle input {
+  accent-color: var(--accent-2);
+}
+
+.pseudo-editor {
+  width: 100%;
+  min-height: 400px;
+  resize: vertical;
+  font-family: var(--font-jetbrains-mono), monospace;
+  line-height: 1.5;
+}
+
+.pseudo-hint {
+  margin: 0;
+  color: var(--ink-200);
+  line-height: 1.6;
+}
+
+.pseudo-output {
+  margin: 0;
+  min-height: 400px;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+  background: rgba(5, 15, 29, 0.93);
+  overflow: auto;
+}
+
+.pseudo-output code {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.78rem;
+  color: #d2e6ff;
+}
+
+.pseudo-issues h3 {
+  margin: 0;
+}
+
+.pseudo-issues ul {
+  margin: 0.55rem 0 0;
+  padding-left: 1.05rem;
+  color: var(--ink-200);
+  display: grid;
+  gap: 0.35rem;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -707,6 +780,10 @@ textarea {
 
 @media (max-width: 900px) {
   .contact-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .pseudo-grid {
     grid-template-columns: 1fr;
   }
 
