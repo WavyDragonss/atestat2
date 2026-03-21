@@ -851,14 +851,27 @@ export function transpilePseudocodeToCpp(input: string, options: CompileOptions 
 
     const parsedFor = parseForLine(trimmed);
     if (parsedFor) {
-      const stepName = `__step_${parsedFor.variable}_${i + 1}`;
       const start = normalizeOperatorsCpp(parsedFor.start);
       const end = normalizeOperatorsCpp(parsedFor.end);
       const step = normalizeOperatorsCpp(parsedFor.step);
-      generated.push(`${currentIndent(indentLevel)}int ${stepName} = (${step});`);
-      generated.push(
-        `${currentIndent(indentLevel)}for (int ${parsedFor.variable} = (${start}); ${stepName} >= 0 ? ${parsedFor.variable} <= (${end}) : ${parsedFor.variable} >= (${end}); ${parsedFor.variable} += ${stepName}) {`,
-      );
+      const compactStep = step.replace(/\s+/g, "");
+
+      if (compactStep === "1" || compactStep === "(1)") {
+        generated.push(
+          `${currentIndent(indentLevel)}for (int ${parsedFor.variable} = (${start}); ${parsedFor.variable} <= (${end}); ${parsedFor.variable}++) {`,
+        );
+      } else if (compactStep === "-1" || compactStep === "(-1)") {
+        generated.push(
+          `${currentIndent(indentLevel)}for (int ${parsedFor.variable} = (${start}); ${parsedFor.variable} >= (${end}); ${parsedFor.variable}--) {`,
+        );
+      } else {
+        const stepName = `__step_${parsedFor.variable}_${i + 1}`;
+        generated.push(`${currentIndent(indentLevel)}int ${stepName} = (${step});`);
+        generated.push(
+          `${currentIndent(indentLevel)}for (int ${parsedFor.variable} = (${start}); ${stepName} >= 0 ? ${parsedFor.variable} <= (${end}) : ${parsedFor.variable} >= (${end}); ${parsedFor.variable} += ${stepName}) {`,
+        );
+      }
+
       declaredVars.add(parsedFor.variable);
       stack.push({ type: "for", line: i + 1 });
       indentLevel += 1;
