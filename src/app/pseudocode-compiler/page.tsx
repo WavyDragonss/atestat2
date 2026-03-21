@@ -1,9 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PageHero } from "@/components/PageHero";
-import { executePseudocode } from "@/lib/pseudocodeCompiler";
+import {
+  compilePseudocode,
+  describeStructureGuide,
+  executePseudocode,
+  extractReadVariables,
+  formatAndTranslatePseudocode,
+  translateCppToPseudocode,
+  transpilePseudocodeToCpp,
+} from "@/lib/pseudocodeCompiler";
 
 const starterCode = `citește x,y
 (numere naturale nenule)
@@ -19,105 +27,451 @@ nr1
 │ scrie 1
 └■`;
 
+type EditorStage = "editing" | "closing" | "actions";
+type FlowStage = "idle" | "compiled" | "running" | "done";
+
 export default function PseudocodeCompilerPage() {
   const [source, setSource] = useState(starterCode);
-  const [inputValues, setInputValues] = useState("4, 9");
   const [wildcardMode, setWildcardMode] = useState(true);
 
-  const execution = useMemo(
-    () => executePseudocode(source, inputValues, { wildcardMode }),
-    [source, inputValues, wildcardMode],
+  const [editorStage, setEditorStage] = useState<EditorStage>("editing");
+  const [flowStage, setFlowStage] = useState<FlowStage>("idle");
+
+  const [formattedLines, setFormattedLines] = useState<string[]>([]);
+  const [reviewCppText, setReviewCppText] = useState("");
+  const [reviewReady, setReviewReady] = useState(false);
+  const [reviewApproved, setReviewApproved] = useState(false);
+
+  const [inputMap, setInputMap] = useState<Record<string, string>>({});
+  const [runtimeLines, setRuntimeLines] = useState<string[]>([]);
+  const [runtimeError, setRuntimeError] = useState<string | null>(null);
+  const [showOutputPanel, setShowOutputPanel] = useState(false);
+  const [showCppVersion, setShowCppVersion] = useState(false);
+  const [showJsDebug, setShowJsDebug] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  const reviewedText = useMemo(() => formattedLines.join("\n"), [formattedLines]);
+  const compileSource = reviewApproved || reviewReady ? reviewedText : source;
+
+  const compileResult = useMemo(
+    () => compilePseudocode(compileSource, { wildcardMode }),
+    [compileSource, wildcardMode],
   );
 
-  const result = execution.compile;
+  const cppResult = useMemo(
+    () => transpilePseudocodeToCpp(compileSource, { wildcardMode }),
+    [compileSource, wildcardMode],
+  );
+
+  const readVariables = useMemo(() => extractReadVariables(compileSource), [compileSource]);
+  const structureGuide = useMemo(() => describeStructureGuide(compileSource), [compileSource]);
+  const runtimeText = useMemo(() => runtimeLines.join(""), [runtimeLines]);
+
+  useEffect(() => {
+    setInputMap((current) => {
+      const next: Record<string, string> = {};
+      for (const variable of readVariables) {
+        next[variable] = current[variable] ?? "";
+      }
+      return next;
+    });
+  }, [readVariables]);
+
+  function closeEditorAndShowActions() {
+    setEditorStage("closing");
+    window.setTimeout(() => {
+      setEditorStage("actions");
+    }, 420);
+  }
+
+  function resetExecutionPanels() {
+    setFlowStage("idle");
+    setShowOutputPanel(false);
+    setShowCppVersion(false);
+    setShowJsDebug(false);
+    setRuntimeError(null);
+    setRuntimeLines([]);
+  }
+
+  function onFormat() {
+    const candidate = formatAndTranslatePseudocode(source);
+    const pseudoLines = candidate.split("\n");
+    const cppCandidate = transpilePseudocodeToCpp(candidate, { wildcardMode }).cpp;
+    setFormattedLines(pseudoLines);
+    setReviewCppText(cppCandidate);
+    setReviewReady(true);
+    setReviewApproved(false);
+    resetExecutionPanels();
+  }
+
+  function syncCppFromPseudo(nextLines: string[]) {
+    const pseudoText = nextLines.join("\n");
+    const nextCpp = transpilePseudocodeToCpp(pseudoText, { wildcardMode }).cpp;
+    setReviewCppText(nextCpp);
+  }
+
+  function onLineChange(index: number, nextValue: string) {
+    setFormattedLines((current) => {
+      const next = current.map((line, i) => (i === index ? nextValue : line));
+      syncCppFromPseudo(next);
+      return next;
+    });
+  }
+
+  function onLineInsertAfter(index: number) {
+    setFormattedLines((current) => {
+      const next = [...current];
+      next.splice(index + 1, 0, "");
+      syncCppFromPseudo(next);
+      return next;
+    });
+  }
+
+  function onLineDelete(index: number) {
+    setFormattedLines((current) => {
+      if (current.length <= 1) {
+        const single = [""];
+        syncCppFromPseudo(single);
+        return single;
+      }
+      const next = current.filter((_, i) => i !== index);
+      syncCppFromPseudo(next);
+      return next;
+    });
+  }
+
+  function onLineMove(index: number, direction: -1 | 1) {
+    setFormattedLines((current) => {
+      const target = index + direction;
+      if (target < 0 || target >= current.length) {
+        return current;
+      }
+      const next = [...current];
+      const [item] = next.splice(index, 1);
+      next.splice(target, 0, item);
+      syncCppFromPseudo(next);
+      return next;
+    });
+  }
+
+  function onCppReviewChange(nextCpp: string) {
+    setReviewCppText(nextCpp);
+    const pseudoText = translateCppToPseudocode(nextCpp);
+    const nextLines = pseudoText.split("\n");
+    setFormattedLines(nextLines.length > 0 ? nextLines : [""]);
+  }
+
+  function onApproveAndCompile() {
+    setReviewApproved(true);
+    setFlowStage("compiled");
+    setShowOutputPanel(false);
+    setShowCppVersion(false);
+    setShowJsDebug(false);
+    setRuntimeError(null);
+    setRuntimeLines([]);
+  }
+
+  function onEdit() {
+    resetExecutionPanels();
+    if (formattedLines.length === 0) {
+      const candidate = formatAndTranslatePseudocode(source);
+      setFormattedLines(candidate.split("\n"));
+    }
+    setReviewReady(true);
+    setReviewApproved(false);
+    setEditorStage("actions");
+  }
+
+  function onRun() {
+    const values = readVariables.map((variable) => inputMap[variable] ?? "").join(" ");
+
+    setFlowStage("running");
+    setShowOutputPanel(false);
+    setRuntimeError(null);
+
+    window.setTimeout(() => {
+      const result = executePseudocode(compileSource, values, { wildcardMode });
+      setRuntimeLines(result.outputs);
+      setRuntimeError(result.runtimeError);
+      setFlowStage("done");
+      setShowOutputPanel(true);
+    }, 340);
+  }
+
+  function onChangeVariableValues() {
+    setFlowStage("compiled");
+    setShowOutputPanel(false);
+    setRuntimeError(null);
+  }
+
+  function onRequestNewCode() {
+    setShowResetConfirm(true);
+  }
+
+  function onCancelReset() {
+    setShowResetConfirm(false);
+  }
+
+  function onConfirmReset() {
+    setSource("");
+    setFormattedLines([]);
+    setReviewCppText("");
+    setReviewReady(false);
+    setReviewApproved(false);
+    setEditorStage("editing");
+    resetExecutionPanels();
+    setShowResetConfirm(false);
+  }
 
   return (
     <main className="page-shell">
       <PageHero
         eyebrow="Laborator"
         title="Compilator de pseudocod"
-        description="Scrie pseudocod in romana si genereaza automat JavaScript. Modul wildcard recunoaste inclusiv forme scanate cu simboluri speciale, apoi poti executa codul cu valori introduse pentru citeste."
+        description="Flux obligatoriu: introdu codul, formatare/traducere, confirmare daca textul este corect, apoi compilare si rulare cu valori pentru citeste."
       />
 
-      <section className="pseudo-grid">
-        <article className="info-card pseudo-panel">
-          <div className="pseudo-panel-head">
-            <h2>Editor pseudocod</h2>
-            <label className="pseudo-toggle" htmlFor="wildcard-mode">
-              <input
-                id="wildcard-mode"
-                type="checkbox"
-                checked={wildcardMode}
-                onChange={(event) => setWildcardMode(event.target.checked)}
+      <section className="pseudo-workbench">
+        <article
+          className={`info-card pseudo-intro-card ${
+            editorStage === "closing" ? "is-closing" : editorStage === "actions" ? "is-closed" : ""
+          }`}
+        >
+          {editorStage !== "actions" ? (
+            <>
+              <div className="pseudo-panel-head">
+                <h2>INTRODU CODUL:</h2>
+                <label className="pseudo-toggle" htmlFor="wildcard-mode">
+                  <input
+                    id="wildcard-mode"
+                    type="checkbox"
+                    checked={wildcardMode}
+                    onChange={(event) => setWildcardMode(event.target.checked)}
+                  />
+                  Mod wildcard
+                </label>
+              </div>
+
+              <textarea
+                value={source}
+                onChange={(event) => setSource(event.target.value)}
+                className="pseudo-editor"
+                spellCheck={false}
+                aria-label="Editor pseudocod"
               />
-              Mod wildcard
-            </label>
-          </div>
 
-          <textarea
-            value={source}
-            onChange={(event) => setSource(event.target.value)}
-            className="pseudo-editor"
-            spellCheck={false}
-            aria-label="Editor pseudocod"
-          />
-
-          <label className="pseudo-input-label" htmlFor="pseudo-input-values">
-            Valori pentru citeste (separate prin virgula, spatiu sau rand nou)
-          </label>
-          <textarea
-            id="pseudo-input-values"
-            value={inputValues}
-            onChange={(event) => setInputValues(event.target.value)}
-            className="pseudo-input-values"
-            spellCheck={false}
-          />
-
-          <div className="pseudo-run-block">
-            <h3>Rezultat executie</h3>
-            {execution.runtimeError ? (
-              <p className="pseudo-error">Eroare: {execution.runtimeError}</p>
-            ) : execution.outputs.length === 0 ? (
-              <p className="pseudo-empty">Programul nu a produs iesire.</p>
-            ) : (
-              <pre className="pseudo-output pseudo-runtime-output">
-                <code>{execution.outputs.join("\n")}</code>
-              </pre>
-            )}
-          </div>
-
-          <p className="pseudo-hint">
-            Suport principal: <strong>citește</strong>, <strong>scrie</strong>, <strong>atribuire</strong> cu
-            <strong> ← </strong>, <strong>dacă/altfel</strong>, <strong>cât timp</strong>, <strong>pentru</strong>,
-            <strong> repetă...până când</strong>, operatori <strong>div</strong>, <strong>mod</strong>,
-            <strong> și/sau/nu</strong>.
-          </p>
+              <div className="pseudo-action-row">
+                <button type="button" className="primary-btn" onClick={closeEditorAndShowActions}>
+                  Continua
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="pseudo-main-actions">
+              <button type="button" className="primary-btn" onClick={onFormat}>
+                Formateaza textul
+              </button>
+              <button type="button" className="ghost-btn" onClick={onEdit}>
+                Editeaza
+              </button>
+              <button type="button" className="ghost-btn" onClick={onRequestNewCode}>
+                Introdu alt cod
+              </button>
+            </div>
+          )}
         </article>
 
-        <article className="info-card pseudo-panel">
+        {editorStage === "actions" && reviewReady && !reviewApproved ? (
+          <article className="info-card pseudo-review-card">
+            <div className="pseudo-panel-head">
+              <h2>Text formatat/tradus</h2>
+              <p className="pseudo-read-hint">Verifica si corecteaza daca este necesar</p>
+            </div>
+
+            <div className="pseudo-dual-review">
+              <div>
+                <p className="pseudo-read-hint">Pseudocod (editare pe linii)</p>
+                <div className="pseudo-line-editor" aria-label="Editor interactiv text formatat">
+                  {formattedLines.map((line, index) => (
+                    <div key={`line-${index}`} className="pseudo-line-row">
+                      <span className="pseudo-line-number">{index + 1}</span>
+                      <input
+                        value={line}
+                        onChange={(event) => onLineChange(index, event.target.value)}
+                        spellCheck={false}
+                        aria-label={`Linia ${index + 1}`}
+                      />
+                      <div className="pseudo-line-actions">
+                        <button type="button" className="ghost-btn" onClick={() => onLineMove(index, -1)}>
+                          ↑
+                        </button>
+                        <button type="button" className="ghost-btn" onClick={() => onLineMove(index, 1)}>
+                          ↓
+                        </button>
+                        <button type="button" className="ghost-btn" onClick={() => onLineInsertAfter(index)}>
+                          +
+                        </button>
+                        <button type="button" className="ghost-btn" onClick={() => onLineDelete(index)}>
+                          -
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="pseudo-read-hint">C++ (editeaza si sincronizeaza in pseudocod)</p>
+                <textarea
+                  className="pseudo-editor"
+                  value={reviewCppText}
+                  onChange={(event) => onCppReviewChange(event.target.value)}
+                  spellCheck={false}
+                  aria-label="Editor C++ pentru sincronizare"
+                />
+              </div>
+            </div>
+
+            <div className="pseudo-action-row">
+              <button type="button" className="primary-btn" onClick={onApproveAndCompile}>
+                Da, este corect. Compileaza
+              </button>
+              <button type="button" className="ghost-btn" onClick={onFormat}>
+                Reformateaza
+              </button>
+              <button type="button" className="ghost-btn" onClick={onRequestNewCode}>
+                Introdu alt cod
+              </button>
+            </div>
+
+            <h3>Harta structuri (| si -=)</h3>
+            <pre className="pseudo-output">
+              <code>{structureGuide || "Nu s-au detectat structuri."}</code>
+            </pre>
+          </article>
+        ) : null}
+
+        {(flowStage === "compiled" || flowStage === "running" || flowStage === "done") && reviewApproved ? (
+          <article
+            className={`info-card pseudo-input-card ${
+              flowStage === "running" ? "is-minimized" : flowStage === "done" ? "is-hidden" : ""
+            }`}
+          >
+            <div className="pseudo-panel-head">
+              <h2>Valori pentru citeste</h2>
+              <p className="pseudo-read-hint">{readVariables.length} variabile detectate</p>
+            </div>
+
+            {readVariables.length === 0 ? (
+              <p className="pseudo-empty">Nu exista instructiuni de input in textul aprobat.</p>
+            ) : (
+              <div className="pseudo-input-grid">
+                {readVariables.map((variable) => (
+                  <label key={variable} className="pseudo-var-field">
+                    {variable}
+                    <input
+                      value={inputMap[variable] ?? ""}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        setInputMap((current) => ({ ...current, [variable]: value }));
+                      }}
+                    />
+                  </label>
+                ))}
+              </div>
+            )}
+
+            <div className="pseudo-action-row">
+              <button type="button" className="primary-btn" onClick={onRun}>
+                Run
+              </button>
+            </div>
+          </article>
+        ) : null}
+
+        <article className={`info-card pseudo-output-card ${showOutputPanel ? "is-open" : ""}`}>
           <div className="pseudo-panel-head">
-            <h2>JavaScript generat</h2>
-            <Link href="/pseudocode-guide" className="ghost-btn">
-              Vezi ghidul complet
-            </Link>
+            <h2>Rezultate</h2>
+            <div className="pseudo-toggle-row">
+              {reviewApproved ? (
+                <button type="button" className="ghost-btn" onClick={onChangeVariableValues}>
+                  Schimba valorile
+                </button>
+              ) : null}
+              <button
+                type="button"
+                className="ghost-btn pseudo-debug-secret-btn"
+                onClick={() => setShowJsDebug((current) => !current)}
+                title="Debug"
+                aria-label="Debug"
+              >
+                debug
+              </button>
+              <button type="button" className="ghost-btn" onClick={onRequestNewCode}>
+                Introdu alt cod
+              </button>
+              <button
+                type="button"
+                className="ghost-btn"
+                onClick={() => setShowCppVersion((current) => !current)}
+              >
+                {showCppVersion ? "Ascunde versiunea C++" : "Afiseaza versiunea C++"}
+              </button>
+              <Link href="/pseudocode-guide" className="ghost-btn">
+                Ghid structuri
+              </Link>
+            </div>
           </div>
 
+          {!reviewApproved ? (
+            <p className="pseudo-empty">Formateaza textul, confirma corectitudinea si compileaza pentru a continua.</p>
+          ) : null}
+
+          {runtimeError ? <p className="pseudo-error">Eroare: {runtimeError}</p> : null}
+
+          {showOutputPanel ? (
+            <pre className="pseudo-runtime-box">
+              <code>{runtimeText.length > 0 ? runtimeText : "Programul nu a produs iesire."}</code>
+            </pre>
+          ) : (
+            <p className="pseudo-empty">Ruleaza codul pentru a deschide zona de output.</p>
+          )}
+
+          {showJsDebug ? (
+            <>
+              <h3>JavaScript generat</h3>
+              <pre className="pseudo-output">
+                <code>{compileResult.js}</code>
+              </pre>
+            </>
+          ) : null}
+
+          <h3>Text compilat (normalizat)</h3>
           <pre className="pseudo-output">
-            <code>{result.js}</code>
+            <code>{compileResult.normalizedPseudocode}</code>
           </pre>
 
-          <h3>Pseudocod normalizat</h3>
+          <h3>Harta structuri (| si -=)</h3>
           <pre className="pseudo-output">
-            <code>{result.normalizedPseudocode}</code>
+            <code>{structureGuide || "Nu s-au detectat structuri."}</code>
           </pre>
+
+          {showCppVersion ? (
+            <>
+              <h3>Versiune C++</h3>
+              <pre className="pseudo-output">
+                <code>{cppResult.cpp}</code>
+              </pre>
+            </>
+          ) : null}
 
           <div className="pseudo-issues">
             <h3>Diagnostic</h3>
-            {result.issues.length === 0 ? (
+            {compileResult.issues.length === 0 ? (
               <p className="success-text">Fara probleme detectate.</p>
             ) : (
               <ul>
-                {result.issues.map((issue) => (
+                {compileResult.issues.map((issue) => (
                   <li key={`${issue.line}-${issue.message}`}>
                     Linia {issue.line}: {issue.message}
                   </li>
@@ -126,6 +480,23 @@ export default function PseudocodeCompilerPage() {
             )}
           </div>
         </article>
+
+        {showResetConfirm ? (
+          <div className="pseudo-modal-backdrop" role="presentation">
+            <div className="info-card pseudo-modal" role="dialog" aria-modal="true" aria-label="Confirmare resetare progres">
+              <h3>Esti sigur?</h3>
+              <p>Progresul se va sterge.</p>
+              <div className="pseudo-action-row">
+                <button type="button" className="primary-btn" onClick={onConfirmReset}>
+                  Da, introdu alt cod
+                </button>
+                <button type="button" className="ghost-btn" onClick={onCancelReset}>
+                  Anuleaza
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </section>
     </main>
   );
