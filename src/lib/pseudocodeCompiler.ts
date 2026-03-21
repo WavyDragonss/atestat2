@@ -1053,6 +1053,31 @@ export function translateCppToPseudocode(cppCode: string) {
       continue;
     }
 
+    const classicForMatch = line.match(
+      /^for\s*\(\s*int\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.+?)\s*;\s*\1\s*(<=|>=|<|>)\s*(.+?)\s*;\s*\1\s*(\+\+|--|\+=\s*.+|-=\s*.+)\s*\)\s*\{\s*$/,
+    );
+    if (classicForMatch) {
+      const variable = classicForMatch[1];
+      const startRaw = classicForMatch[2].trim().replace(/^\((.+)\)$/, "$1");
+      const endRaw = classicForMatch[4].trim().replace(/^\((.+)\)$/, "$1");
+      const updateRaw = classicForMatch[5].replace(/\s+/g, "");
+
+      let step = "1";
+      if (updateRaw === "--") {
+        step = "-1";
+      } else if (updateRaw.startsWith("+=")) {
+        step = denormalizeOperatorsToPseudocode(updateRaw.slice(2));
+      } else if (updateRaw.startsWith("-=")) {
+        step = `-(${denormalizeOperatorsToPseudocode(updateRaw.slice(2))})`;
+      }
+
+      output.push(
+        `pentru ${variable} <- ${denormalizeOperatorsToPseudocode(startRaw)}, ${denormalizeOperatorsToPseudocode(endRaw)}, ${step} executa`,
+      );
+      blockStack.push("for");
+      continue;
+    }
+
     const forMatch = line.match(
       /^for\s*\(\s*int\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*\((.+)\)\s*;\s*([^;]+);\s*\1\s*\+=\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\)\s*\{\s*$/,
     );
@@ -1064,7 +1089,7 @@ export function translateCppToPseudocode(cppCode: string) {
       const step = stepMemory.get(stepName) ?? "1";
 
       let end = "?";
-      const endMatch = condition.match(new RegExp(`\\b${variable}\\b\\s*(?:<=|>=)\\s*\\((.+)\\)`));
+      const endMatch = condition.match(new RegExp(`\\b${variable}\\b\\s*(?:<=|>=)\\s*\\(?(.+?)\\)?\\s*$`));
       if (endMatch) {
         end = denormalizeOperatorsToPseudocode(endMatch[1]);
       }
