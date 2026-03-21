@@ -30,6 +30,15 @@ nr1
 type EditorStage = "editing" | "closing" | "actions";
 type FlowStage = "idle" | "compiled" | "running" | "done";
 
+type CppExecutionState = {
+  status: "idle" | "loading" | "done" | "error";
+  compileStdout: string;
+  compileStderr: string;
+  runStdout: string;
+  runStderr: string;
+  message: string;
+};
+
 export default function PseudocodeCompilerPage() {
   const [source, setSource] = useState(starterCode);
   const [wildcardMode, setWildcardMode] = useState(true);
@@ -49,6 +58,14 @@ export default function PseudocodeCompilerPage() {
   const [showCppVersion, setShowCppVersion] = useState(false);
   const [showJsDebug, setShowJsDebug] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [cppExec, setCppExec] = useState<CppExecutionState>({
+    status: "idle",
+    compileStdout: "",
+    compileStderr: "",
+    runStdout: "",
+    runStderr: "",
+    message: "",
+  });
 
   const reviewedText = useMemo(() => formattedLines.join("\n"), [formattedLines]);
   const compileSource = reviewApproved || reviewReady ? reviewedText : source;
@@ -89,6 +106,14 @@ export default function PseudocodeCompilerPage() {
     setShowOutputPanel(false);
     setShowCppVersion(false);
     setShowJsDebug(false);
+    setCppExec({
+      status: "idle",
+      compileStdout: "",
+      compileStderr: "",
+      runStdout: "",
+      runStderr: "",
+      message: "",
+    });
     setRuntimeError(null);
     setRuntimeLines([]);
   }
@@ -202,6 +227,60 @@ export default function PseudocodeCompilerPage() {
     setFlowStage("compiled");
     setShowOutputPanel(false);
     setRuntimeError(null);
+  }
+
+  async function onCompileCpp() {
+    const stdin = readVariables.map((variable) => inputMap[variable] ?? "").join(" ");
+    setCppExec((current) => ({ ...current, status: "loading", message: "Compilez C++..." }));
+
+    try {
+      const response = await fetch("/api/compile-cpp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: cppResult.cpp,
+          stdin,
+        }),
+      });
+
+      const payload = (await response.json()) as {
+        error?: string;
+        message?: string | null;
+        compile?: { stdout?: string; stderr?: string } | null;
+        run?: { stdout?: string; stderr?: string } | null;
+      };
+
+      if (!response.ok || payload.error) {
+        setCppExec({
+          status: "error",
+          compileStdout: "",
+          compileStderr: payload.error ?? "Eroare la compilarea externa.",
+          runStdout: "",
+          runStderr: "",
+          message: "",
+        });
+        return;
+      }
+
+      setCppExec({
+        status: "done",
+        compileStdout: payload.compile?.stdout ?? "",
+        compileStderr: payload.compile?.stderr ?? "",
+        runStdout: payload.run?.stdout ?? "",
+        runStderr: payload.run?.stderr ?? "",
+        message: payload.message ?? "",
+      });
+      setShowCppVersion(true);
+    } catch {
+      setCppExec({
+        status: "error",
+        compileStdout: "",
+        compileStderr: "Nu am putut contacta compilatorul extern.",
+        runStdout: "",
+        runStderr: "",
+        message: "",
+      });
+    }
   }
 
   function onRequestNewCode() {
@@ -417,6 +496,9 @@ export default function PseudocodeCompilerPage() {
               >
                 {showCppVersion ? "Ascunde versiunea C++" : "Afiseaza versiunea C++"}
               </button>
+              <button type="button" className="ghost-btn" onClick={onCompileCpp}>
+                {cppExec.status === "loading" ? "Compilez C++..." : "Compileaza C++"}
+              </button>
               <Link href="/pseudocode-guide" className="ghost-btn">
                 Ghid structuri
               </Link>
@@ -462,6 +544,37 @@ export default function PseudocodeCompilerPage() {
               <pre className="pseudo-output">
                 <code>{cppResult.cpp}</code>
               </pre>
+
+              <h3>Rezultat compilator extern C++</h3>
+              {cppExec.status === "idle" ? (
+                <p className="pseudo-empty">Apasa pe Compileaza C++ pentru verificare reala.</p>
+              ) : null}
+              {cppExec.status === "loading" ? <p className="pseudo-empty">Compilez...</p> : null}
+              {cppExec.message ? <p className="pseudo-empty">{cppExec.message}</p> : null}
+
+              {cppExec.compileStderr ? (
+                <pre className="pseudo-output">
+                  <code>{cppExec.compileStderr}</code>
+                </pre>
+              ) : null}
+
+              {cppExec.compileStdout ? (
+                <pre className="pseudo-output">
+                  <code>{cppExec.compileStdout}</code>
+                </pre>
+              ) : null}
+
+              {cppExec.runStderr ? (
+                <pre className="pseudo-output">
+                  <code>{cppExec.runStderr}</code>
+                </pre>
+              ) : null}
+
+              {cppExec.runStdout ? (
+                <pre className="pseudo-runtime-box">
+                  <code>{cppExec.runStdout}</code>
+                </pre>
+              ) : null}
             </>
           ) : null}
 
