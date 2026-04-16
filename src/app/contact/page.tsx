@@ -79,7 +79,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Trimite feedback"
-        description="Trimite idei, raporteaza probleme sau sugereaza algoritmi pe care vrei sa ii vezi in vizualizator."
+        description="[Descriere scurta — de ce ai vrea sa primesti mesaje si despre ce.]"
       />
 
       <section className="contact-wrap">
@@ -154,11 +154,9 @@ export default function ContactPage() {
         </form>
 
         <aside className="info-card">
-          <h2>Ce feedback ajuta cel mai mult?</h2>
-          <p>Care explicatii au fost clare sau confuze.</p>
-          <p>Ce algoritmi vrei sa fie vizualizati in continuare.</p>
-          <p>Ce imbunatatiri de interfata ar face invatarea mai usoara.</p>
-          {state.succeeded ? <p className="success-text">Multumim pentru feedback!</p> : null}
+          <h2>De ce sa dai mesaj?</h2>
+          <p>[Adauga aici motivele pentru care cineva ar vrea sa te contacteze.]</p>
+          {state.succeeded ? <p className="success-text">Multumim pentru mesaj!</p> : null}
         </aside>
       </section>
     </main>

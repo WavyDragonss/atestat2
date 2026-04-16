@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(mv src/app/visualizer/page.tsx old_files/src/app/visualizer/page.tsx)",
+      "Bash(mv src/app/pseudocode-compiler/page.tsx old_files/src/app/pseudocode-compiler/page.tsx)",
+      "Bash(mv src/app/pseudocode-guide/page.tsx old_files/src/app/pseudocode-guide/page.tsx)",
+      "Bash(mv src/app/bac-problems/page.tsx old_files/src/app/bac-problems/page.tsx)",
+      "Bash(mv src/app/algorithms/page.tsx old_files/src/app/algorithms/page.tsx)",
+      "Bash(curl -s http://localhost:3000/atestate)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(cmd /c \"taskkill /F /IM node.exe\")",
+      "Bash(cmd /c \"taskkill /F /IM node.exe 2>&1\")",
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Write-Output 'done'\")"
+    ]
+  }
+}

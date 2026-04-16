@@ -29,6 +29,8 @@ export function ParticleCanvas() {
     let width = 0;
     let height = 0;
     let animationFrame = 0;
+    let resizeTimer = 0;
+    let cachedRect = canvas.getBoundingClientRect();
 
     const mouse = { x: -9999, y: -9999 };
 
@@ -40,18 +42,21 @@ export function ParticleCanvas() {
     }));
 
     const resize = () => {
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cachedRect = canvas.getBoundingClientRect();
+      }, 100);
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = event.clientX - rect.left;
-      mouse.y = event.clientY - rect.top;
+      mouse.x = event.clientX - cachedRect.left;
+      mouse.y = event.clientY - cachedRect.top;
     };
 
     const handleMouseLeave = () => {
@@ -112,7 +117,13 @@ export function ParticleCanvas() {
       animationFrame = requestAnimationFrame(step);
     };
 
-    resize();
+    // Size canvas immediately on mount without debounce
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     window.addEventListener("resize", resize);
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
@@ -120,6 +131,7 @@ export function ParticleCanvas() {
 
     return () => {
       cancelAnimationFrame(animationFrame);
+      clearTimeout(resizeTimer);
       window.removeEventListener("resize", resize);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);

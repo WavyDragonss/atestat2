@@ -15,9 +15,9 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wavy's Corner | Invatare interactiva de algoritmi",
+  title: "Wavy's Corner",
   description:
-    "Invata algoritmi prin vizualizari interactive, explicatii clare si controale practice de simulare.",
+    "Coltul meu de internet — atestate, despre mine si contact.",
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
