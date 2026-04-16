@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program Ajutator — Matematică-Informatică | Atestat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #0f1524;
+    --surface: #141b2d;
+    --surface-2: #1a2238;
+    --border: #252e47;
+    --border-2: #2f3a56;
+    --text: #e8ecf5;
+    --text-dim: #9ba4bd;
+    --text-faint: #6b7591;
+    --accent: #5eead4;
+    --accent-hot: #2dd4bf;
+    --accent-dim: #134e4a;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --good: #86efac;
+    --serif: 'Fraunces', 'Times New Roman', serif;
+    --sans: 'Inter Tight', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(94, 234, 212, 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(94, 234, 212, 0.04), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  main, header, footer, nav { position: relative; z-index: 1; }
+
+  /* TOP BAR */
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+  }
+  .brand { font-family: var(--serif); font-weight: 500; font-size: 20px; letter-spacing: -0.02em; color: var(--accent); }
+  .brand em { font-style: italic; font-weight: 400; color: var(--text-dim); }
+  .topnav { display: flex; gap: 28px; font-size: 13px; color: var(--text-dim); }
+  .topnav a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .topnav a:hover { color: var(--accent); }
+  .topnav a.active { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 32px 80px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero-desc { font-size: 17px; color: var(--text-dim); max-width: 520px; margin-bottom: 40px; line-height: 1.7; }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .hero-meta > div { display: flex; flex-direction: column; gap: 6px; }
+  .hero-meta .label { color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.15em; font-size: 10px; }
+  .hero-meta .val { color: var(--text); font-size: 14px; }
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1.1;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+  }
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(94, 234, 212, 0.03) 100%);
+    pointer-events: none;
+  }
+  .hero-bars {
+    position: absolute;
+    inset: 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .hero-bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--accent), var(--accent-hot));
+    border-radius: 2px 2px 0 0;
+    animation: barDance 4s ease-in-out infinite;
+    opacity: 0.9;
+  }
+  @keyframes barDance {
+    0%, 100% { transform: scaleY(var(--h, 0.5)); }
+    50% { transform: scaleY(calc(var(--h, 0.5) * 1.3)); }
+  }
+  .hero-visual-label {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .hero-visual-label span { color: var(--accent); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+  .section-wrap { max-width: 1280px; margin: 0 auto; padding: 80px 32px; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.2em; }
+  .section-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-sub { color: var(--text-dim); font-size: 16px; margin-top: 16px; max-width: 720px; }
+
+  /* INTRO */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .intro-card { background: var(--surface); padding: 36px 32px; min-height: 220px; display: flex; flex-direction: column; transition: background 0.3s; }
+  .intro-card:hover { background: var(--surface-2); }
+  .intro-card-num { font-family: var(--mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.2em; margin-bottom: 24px; }
+  .intro-card h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin-bottom: 12px; letter-spacing: -0.01em; }
+  .intro-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
+
+  /* VISUALIZER */
+  .viz-container { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .viz-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--bg-2); overflow-x: auto; }
+  .viz-tab {
+    padding: 18px 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    position: relative;
+    top: 1px;
+  }
+  .viz-tab:hover { color: var(--text-dim); }
+  .viz-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .viz-body { display: grid; grid-template-columns: 1fr 380px; gap: 0; min-height: 560px; }
+  .viz-stage { padding: 32px; display: flex; flex-direction: column; gap: 24px; border-right: 1px solid var(--border); }
+  .viz-bars { flex: 1; display: flex; align-items: flex-end; gap: 3px; padding: 20px 0; min-height: 300px; }
+  .viz-bar { flex: 1; background: var(--border-2); border-radius: 2px 2px 0 0; transition: height 0.15s cubic-bezier(0.4,0,0.2,1), background 0.15s; position: relative; min-height: 2px; }
+  .viz-bar.comparing { background: var(--warn); }
+  .viz-bar.swapping { background: var(--bad); }
+  .viz-bar.sorted { background: var(--accent); }
+  .viz-bar.pivot { background: #c084fc; }
+  .viz-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding-top: 20px; border-top: 1px solid var(--border); }
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-2);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  .btn.primary:hover { background: var(--accent-hot); border-color: var(--accent-hot); color: var(--bg); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .viz-slider { display: flex; align-items: center; gap: 10px; margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+  .viz-slider input[type=range] { accent-color: var(--accent); width: 100px; }
+  .viz-info { padding: 32px; background: var(--bg-2); overflow-y: auto; }
+  .viz-info h3 { font-family: var(--serif); font-size: 26px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .viz-info .viz-meta { font-family: var(--mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; }
+  .viz-info p { color: var(--text-dim); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
+  .viz-complexity { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; margin: 20px 0; font-family: var(--mono); font-size: 12px; }
+  .viz-complexity dt { color: var(--text-faint); }
+  .viz-complexity dd { color: var(--text); }
+  .viz-complexity dd strong { color: var(--accent); }
+  .viz-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .viz-stat { padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; }
+  .viz-stat .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .viz-stat .v { font-family: var(--serif); font-size: 28px; color: var(--accent); font-weight: 400; }
+
+  /* CODE BLOCK */
+  .code-block { background: var(--bg-2); border: 1px solid var(--border); border-radius: 3px; padding: 20px; font-family: var(--mono); font-size: 12.5px; line-height: 1.7; overflow-x: auto; margin: 16px 0; color: var(--text-dim); }
+  .code-block .kw { color: #c084fc; }
+  .code-block .fn { color: var(--accent); }
+  .code-block .num { color: var(--warn); }
+  .code-block .str { color: var(--good); }
+  .code-block .comment { color: var(--text-faint); font-style: italic; }
+
+  /* BAC */
+  .bac-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .bac-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 36px; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+  .bac-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.3s; }
+  .bac-card:hover { border-color: var(--border-2); transform: translateY(-2px); }
+  .bac-card:hover::before { opacity: 1; }
+  .bac-card-tag { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); padding: 5px 10px; border: 1px solid var(--accent-dim); border-radius: 2px; margin-bottom: 20px; }
+  .bac-card h3 { font-family: var(--serif); font-size: 26px; font-weight: 400; margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.2; }
+  .bac-card p { color: var(--text-dim); font-size: 14.5px; line-height: 1.7; margin-bottom: 14px; }
+  .bac-card ul { list-style: none; padding: 0; margin: 16px 0 0 0; }
+  .bac-card li { padding: 10px 0 10px 22px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-size: 14px; position: relative; }
+  .bac-card li:last-child { border-bottom: none; }
+  .bac-card li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; top: 12px; bottom: 12px; left: 6px; width: 1px; background: var(--border-2); }
+  .timeline-item { position: relative; padding-bottom: 40px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before { content: ''; position: absolute; left: -32px; top: 8px; width: 13px; height: 13px; border: 2px solid var(--accent); background: var(--bg); border-radius: 50%; }
+  .timeline-month { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .timeline-item h4 { font-family: var(--serif); font-size: 19px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .timeline-item p { color: var(--text-dim); font-size: 14px; line-height: 1.65; }
+
+  /* CALLOUT */
+  .callout { background: linear-gradient(135deg, rgba(94,234,212,0.04), rgba(94,234,212,0.01)); border-left: 2px solid var(--accent); padding: 24px 28px; margin: 24px 0; border-radius: 0 3px 3px 0; }
+  .callout-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .callout p { color: var(--text); font-size: 14.5px; line-height: 1.7; }
+
+  /* QUIZ */
+  .quiz-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 36px; }
+  .quiz-q { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.01em; }
+  .quiz-qnum { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .quiz-opt { padding: 16px 20px; background: var(--bg-2); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; transition: all 0.2s; font-size: 14.5px; color: var(--text); display: flex; align-items: center; gap: 14px; text-align: left; font-family: var(--sans); }
+  .quiz-opt:hover { border-color: var(--border-2); background: var(--surface); }
+  .quiz-opt .letter { font-family: var(--mono); font-size: 11px; color: var(--text-faint); width: 20px; flex-shrink: 0; }
+  .quiz-opt.correct { border-color: var(--good); background: rgba(134,239,172,0.06); }
+  .quiz-opt.correct .letter { color: var(--good); }
+  .quiz-opt.incorrect { border-color: var(--bad); background: rgba(248,113,113,0.06); }
+  .quiz-opt.incorrect .letter { color: var(--bad); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-feedback { padding: 16px 20px; border-radius: 3px; font-size: 14px; line-height: 1.6; display: none; margin-bottom: 8px; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: rgba(134,239,172,0.06); border: 1px solid rgba(134,239,172,0.2); color: var(--text); }
+  .quiz-feedback.no { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2); color: var(--text); }
+  .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+  .quiz-progress { font-family: var(--mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 60px 32px 40px; margin-top: 80px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .footer-brand { font-family: var(--serif); font-size: 28px; font-weight: 300; letter-spacing: -0.02em; }
+  .footer-brand em { font-style: italic; color: var(--accent); }
+  .footer-meta { font-family: var(--mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .viz-body { grid-template-columns: 1fr; }
+    .viz-stage { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 60px 24px 40px; gap: 40px; }
+    .section-head { grid-template-columns: 1fr; gap: 16px; }
+    .intro-grid { grid-template-columns: 1fr; }
+    .bac-grid { grid-template-columns: 1fr; }
+    .topnav { gap: 16px; font-size: 12px; }
+    .topbar-inner { padding: 16px 20px; }
+    .section-wrap { padding: 60px 20px; }
+    .hero-meta { flex-wrap: wrap; gap: 20px; }
+  }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Wavy's Corner <em>/ atestat</em></div>
+    <nav class="topnav">
+      <a href="#intro">Introducere</a>
+      <a href="#algoritmi">Algoritmi</a>
+      <a href="#bac">Ghid BAC</a>
+      <a href="#plan">Plan</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="hero-eyebrow">Atestat · Informatică · 2026</div>
+      <h1>Program <em>ajutator</em><br>pentru elevii de<br>matematică-informatică.</h1>
+      <p class="hero-desc">Un ghid interactiv care explică algoritmii de sortare prin vizualizări animate și oferă o strategie completă de pregătire pentru bacalaureatul la informatică — scris pentru colegii din clasa a 12-a care vor să înțeleagă, nu doar să memoreze.</p>
+      <div class="hero-meta">
+        <div><span class="label">Autor</span><span class="val">Wavy</span></div>
+        <div><span class="label">Profil</span><span class="val">Mate-Info</span></div>
+        <div><span class="label">Limbaj</span><span class="val">C / C++ / Pseudocod</span></div>
+        <div><span class="label">An</span><span class="val">2025 — 2026</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-label"><span>●</span> &nbsp; sorting.live</div>
+      <div class="hero-bars" id="heroBars"></div>
+    </div>
+  </section>
+
+  <!-- INTRODUCERE -->
+  <section id="intro">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <div class="section-num">§ 01 / Introducere</div>
+        <div>
+          <h2 class="section-title">De ce un <em>program ajutător</em>?</h2>
+          <p class="section-sub">Bacalaureatul la informatică nu este greu pentru că e greu — este greu pentru că nimeni nu-ți explică de ce contează. Proiectul acesta rezolvă exact asta.</p>
+        </div>
+      </div>
+      <div class="intro-grid reveal">
+        <div class="intro-card">
+          <div class="intro-card-num">01</div>
+          <h3>Vizualizezi ca să înțelegi</h3>
+          <p>Un algoritm văzut în mișcare rămâne. Sortările sunt primele concepte la care mulți elevi se blochează — aici le vezi executându-se pas cu pas, cu comparații și schimbări marcate cu culori.</p>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-num">02</div>
+          <h3>Ghid real, scris de un elev</h3>
+          <p>Nu un manual. Un plan de pregătire concret pentru BAC: ce să înveți, în ce ordine, ce subiecte pică des și unde pierzi cele mai multe puncte fără să-ți dai seama.</p>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-num">03</div>
+          <h3>Pentru clasa a 12-a</h3>
+          <p>Conținutul este aliniat cu programa Mate-Info: C/C++, structuri de date, complexitate, recursivitate, backtracking. Tot ce ți se cere la examen, organizat pe luni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIZUALIZATORUL -->
+  <section id="algoritmi">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <div class="section-num">§ 02 / Vizualizator</div>
+        <div>
+          <h2 class="section-title">Algoritmi de <em>sortare</em>, în mișcare.</h2>
+          <p class="section-sub">Apasă „Start" și urmărește cum fiecare algoritm aranjează aceleași numere — diferit. Galben = se compară, roșu = se schimbă, verde = sortat definitiv.</p>
+        </div>
+      </div>
+
+      <div class="viz-container reveal">
+        <div class="viz-tabs" id="vizTabs">
+          <button class="viz-tab active" data-algo="bubble">Bubble Sort</button>
+          <button class="viz-tab" data-algo="selection">Selection Sort</button>
+          <button class="viz-tab" data-algo="insertion">Insertion Sort</button>
+          <button class="viz-tab" data-algo="merge">Merge Sort</button>
+          <button class="viz-tab" data-algo="quick">Quick Sort</button>
+        </div>
+        <div class="viz-body">
+          <div class="viz-stage">
+            <div class="viz-bars" id="vizBars"></div>
+            <div class="viz-controls">
+              <button class="btn primary" id="btnStart">▶ Start</button>
+              <button class="btn" id="btnPause">⏸ Pauză</button>
+              <button class="btn" id="btnReset">↻ Resetează</button>
+              <button class="btn" id="btnShuffle">⇄ Amestecă</button>
+              <div class="viz-slider">
+                <span>Dimensiune</span>
+                <input type="range" id="sizeSlider" min="10" max="60" value="30">
+                <span id="sizeVal">30</span>
+              </div>
+              <div class="viz-slider">
+                <span>Viteză</span>
+                <input type="range" id="speedSlider" min="1" max="100" value="60">
+              </div>
+            </div>
+          </div>
+          <div class="viz-info" id="vizInfo"></div>
+        </div>
+      </div>
+
+      <div class="callout reveal" style="margin-top:40px;">
+        <div class="callout-label">★ Observație importantă</div>
+        <p>La BAC, nu contează doar să scrii codul — trebuie să <strong>știi ce complexitate are</strong> și <strong>de ce</strong>. Bubble Sort și Quick Sort rezolvă aceeași problemă, dar pentru 100.000 de elemente Bubble are nevoie de miliarde de pași, iar Quick de câteva milioane. Alegerea algoritmului potrivit = puncte la examen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GHID BAC -->
+  <section id="bac">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <div class="section-num">§ 03 / Ghid BAC</div>
+        <div>
+          <h2 class="section-title">Ce trebuie <em>să știi</em> pentru bacalaureat.</h2>
+          <p class="section-sub">Programa oficială este lungă, dar 80% din puncte vin din câteva capitole. Mai jos, capitolele care pică aproape la fiecare sesiune, cu ce e esențial din fiecare.</p>
+        </div>
+      </div>
+
+      <div class="bac-grid">
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Subiect I · variante</span>
+          <h3>Limbajul C/C++: bazele</h3>
+          <p>Tipuri de date, operatori, structuri de control. Pare banal, dar aici pierzi puncte pe greșeli stupide: confuzie <code style="color:var(--accent)">=</code> vs <code style="color:var(--accent)">==</code>, overflow la <code style="color:var(--accent)">int</code>, priorități de operatori.</p>
+          <ul>
+            <li>Declarații și domeniu de vizibilitate</li>
+            <li>Operatorul <code style="color:var(--accent)">%</code> și aritmetica modulară</li>
+            <li>Conversii implicite și explicite</li>
+            <li>Diferența între <code style="color:var(--accent)">while</code>, <code style="color:var(--accent)">do-while</code>, <code style="color:var(--accent)">for</code></li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Subiect II · frecvent</span>
+          <h3>Tablouri și matrici</h3>
+          <p>Aproape orice problemă de la subiectul II implică un tablou sau o matrice. Trebuie să știi parcurgeri (pe linii, pe coloane, pe diagonale) și să separi rapid: caut un element / caut o proprietate / transform tabloul.</p>
+          <ul>
+            <li>Căutare secvențială și binară</li>
+            <li>Eliminare / inserare în tablou</li>
+            <li>Matrici: diagonale, spirale, rotire</li>
+            <li>Două tablouri paralele (pentru mapări)</li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Subiect III · esențial</span>
+          <h3>Recursivitate</h3>
+          <p>Trei reguli: caz de bază, caz recursiv, progres spre cazul de bază. Dacă lipsește una, programul nu se termină. Exerseaz-o pe factorial, Fibonacci, și apoi pe parcurgeri de vectori — restul vin natural.</p>
+          <ul>
+            <li>Stiva de apeluri: cum funcționează</li>
+            <li>Recursivitate directă vs indirectă</li>
+            <li>Traducere iterativ ↔ recursiv</li>
+            <li>Divide et Impera (legătură cu Merge/Quick Sort)</li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Subiect III · dificil</span>
+          <h3>Backtracking</h3>
+          <p>Cel mai temut subiect, dar cu un șablon fix: alegi, verifici, continui sau dai înapoi. Odată ce înțelegi permutările, restul (aranjamente, combinări, submulțimi, reginele) sunt variații.</p>
+          <ul>
+            <li>Permutări de n elemente</li>
+            <li>Submulțimi și combinări</li>
+            <li>Problema reginelor (n-dame)</li>
+            <li>Șablon general reutilizabil</li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Subiect II · puncte sigure</span>
+          <h3>Șiruri de caractere</h3>
+          <p>Terminator <code style="color:var(--accent)">'\0'</code>, funcții din <code style="color:var(--accent)">&lt;cstring&gt;</code>, <code style="color:var(--accent)">strtok</code> pentru tokenizare. Problemele tipice: numărări de vocale/cuvinte, palindroame, inversări, înlocuiri.</p>
+          <ul>
+            <li><code style="color:var(--accent)">strlen, strcpy, strcat, strcmp</code></li>
+            <li>Parcurgerea unui șir cuvânt cu cuvânt</li>
+            <li>Verificare palindrom (două variante)</li>
+            <li>Citire cu <code style="color:var(--accent)">getline</code> vs <code style="color:var(--accent)">scanf</code></li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Subiect III · mediu</span>
+          <h3>Subprograme și pointeri</h3>
+          <p>Transmitere prin valoare vs prin referință vs prin adresă. Dacă nu știi diferența, ai probleme la jumătate din subiectele III. Pointerii sunt mai simpli decât par — o adresă de memorie, nimic mai mult.</p>
+          <ul>
+            <li>Funcții cu mai multe rezultate (referință)</li>
+            <li>Tablouri transmise la funcții</li>
+            <li>Funcții recursive vs iterative</li>
+            <li>Pointeri la tablouri (legătură)</li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Teorie · 30%</span>
+          <h3>Complexitate și eficiență</h3>
+          <p>Notația O-mare nu e doar o formulă scrisă pe tablă — este diferența între un program care rulează în 1 secundă și unul care rulează în 3 ore. La subiectele teoretice, aproape sigur apare o întrebare de complexitate.</p>
+          <ul>
+            <li>O(1), O(log n), O(n), O(n log n), O(n²)</li>
+            <li>Cazul cel mai bun / mediu / cel mai rău</li>
+            <li>Memorie vs timp — compromisuri</li>
+            <li>De ce Quick bate Bubble în practică</li>
+          </ul>
+        </div>
+
+        <div class="bac-card reveal">
+          <span class="bac-card-tag">Bonus · diferențiatori</span>
+          <h3>Fișiere și structuri</h3>
+          <p>Apar la subiectul III când se cere prelucrarea unor date structurate. Mulți elevi le sar la învățat — fix de asta merită învățate, pentru că îți aduc puncte pe care colegii le pierd.</p>
+          <ul>
+            <li>Citire/scriere în fișiere text</li>
+            <li>Declararea unei structuri cu <code style="color:var(--accent)">struct</code></li>
+            <li>Vector de structuri (baze de date simple)</li>
+            <li>Sortare după un câmp</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section id="plan">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <div class="section-num">§ 04 / Strategie</div>
+        <div>
+          <h2 class="section-title">Un plan de <em>9 luni</em> către BAC.</h2>
+          <p class="section-sub">Dacă începi serios de la început de clasa a 12-a, ai suficient timp. Dacă începi de la semestrul 2, trebuie să tai. Iată ce a funcționat pentru mine și colegii mei.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Septembrie — Octombrie</div>
+          <h4>Fundația: C/C++ și tablouri</h4>
+          <p>Recapitulează tot ce ai învățat în clasele 9-11: sintaxă, operatori, structuri de control, funcții, tablouri unidimensionale. Rezolvă 2-3 probleme pe zi de pe Pbinfo, de dificultate mică. Obiectiv: să nu mai faci greșeli de sintaxă.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Noiembrie</div>
+          <h4>Algoritmi de sortare și căutare</h4>
+          <p>Toți cei 5 algoritmi din vizualizator + căutare binară. Pentru fiecare: scrie-l de la zero de cel puțin 3 ori, memorează complexitatea și înțelege de ce. Acesta este capitolul-cheie — pică garantat.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Decembrie — Ianuarie</div>
+          <h4>Matrici, șiruri și subprograme</h4>
+          <p>Matrici cu parcurgeri neobișnuite (diagonale, spirale), manipulare șiruri de caractere, funcții cu pointeri și referințe. Începe să rezolvi subiecte II complete, cronometrat — 20 minute per subiect.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Februarie</div>
+          <h4>Recursivitate — cu adevărat</h4>
+          <p>Nu doar factorial și Fibonacci. Parcurgeri recursive de vectori, divide et impera, probleme care nu au soluție iterativă naturală. Simulează pe hârtie stiva de apeluri.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Martie</div>
+          <h4>Backtracking — șablonul</h4>
+          <p>Învață o singură dată șablonul general, apoi aplică-l: permutări, aranjamente, combinări, submulțimi, problema reginelor, sudoku simplu. Toate folosesc aceeași structură.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Aprilie</div>
+          <h4>Variante de bac — integral</h4>
+          <p>Câte un subiect complet pe zi, în 3 ore, pe hârtie, fără calculator. Corectează-l singur cu baremul. Identifică tiparele: aceleași tipuri de probleme revin mereu.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Mai</div>
+          <h4>Variante + puncte slabe</h4>
+          <p>Variante cronometrate + reia exact capitolele unde greșești cel mai des. Nu încerca să înveți ceva nou în mai — consolidează.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-month">Iunie (BAC)</div>
+          <h4>Relaxare și recapitulare ușoară</h4>
+          <p>Ultima săptămână: recitire notițe proprii, 2-3 probleme pe zi maxim, somn 8 ore. Nu mai înveți nimic nou. Ai încredere că 9 luni de muncă au fost suficiente.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <div class="callout-label">▲ Sfatul pe care l-aș fi vrut eu</div>
+        <p>Rezolvarea de probleme bate teoria de 10 ori. Poți citi o carte de 500 de pagini despre sortări și tot nu vei ști să scrii Quick Sort. Sau poți să-l scrii o dată, să înțelegi, și gata. <strong>Codul trebuie scris de mâna ta, nu doar citit.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <div class="section-num">§ 05 / Autoevaluare</div>
+        <div>
+          <h2 class="section-title">Vezi unde <em>ești</em>.</h2>
+          <p class="section-sub">Cinci întrebări rapide, fix în stilul subiectelor de la BAC. Vei vedea explicația după fiecare răspuns.</p>
+        </div>
+      </div>
+      <div class="quiz-card reveal" id="quizCard"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Wavy's <em>Corner</em></div>
+      <div class="footer-meta" style="margin-top:8px;">Atestat Informatică · 2026</div>
+    </div>
+    <div class="footer-meta">© Wavy · Mate-Info · Pentru colegi și pentru cei ce vin după</div>
+  </div>
+</footer>
+
+<script>
+/* ── HERO BARS ── */
+(function(){
+  const c = document.getElementById('heroBars');
+  for (let i = 0; i < 32; i++) {
+    const b = document.createElement('div');
+    b.className = 'hero-bar';
+    const h = 0.3 + Math.random() * 0.7;
+    b.style.setProperty('--h', h);
+    b.style.height = '100%';
+    b.style.transformOrigin = 'bottom';
+    b.style.animationDelay = (i * 0.08) + 's';
+    c.appendChild(b);
+  }
+})();
+
+/* ── ALGO INFO ── */
+const ALGO_INFO = {
+  bubble: {
+    name: 'Bubble Sort', tagline: 'Sortare prin interschimbare · Cel mai simplu',
+    desc: 'Algoritmul compară fiecare pereche de elemente vecine și le interschimbă dacă sunt în ordine greșită. După fiecare trecere completă prin vector, cel mai mare element „plutește" până la capăt — de aici numele.',
+    desc2: 'Este ineficient pentru vectori mari, dar este primul algoritm pe care-l înveți pentru că ilustrează perfect conceptele de comparație și interschimbare. La BAC apare frecvent în subiectele II ca variantă de implementat.',
+    best: 'O(n)', avg: 'O(n²)', worst: 'O(n²)', space: 'O(1)', stable: 'Da',
+    code: `<span class="kw">void</span> <span class="fn">bubbleSort</span>(<span class="kw">int</span> v[], <span class="kw">int</span> n) {\n  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; n-<span class="num">1</span>; i++)\n    <span class="kw">for</span> (<span class="kw">int</span> j = <span class="num">0</span>; j &lt; n-i-<span class="num">1</span>; j++)\n      <span class="kw">if</span> (v[j] &gt; v[j+<span class="num">1</span>]) {\n        <span class="kw">int</span> t = v[j]; v[j] = v[j+<span class="num">1</span>]; v[j+<span class="num">1</span>] = t;\n      }\n}`
+  },
+  selection: {
+    name: 'Selection Sort', tagline: 'Sortare prin selecție · Minim de interschimbări',
+    desc: 'Găsește minimul din porțiunea nesortată și îl pune la începutul ei, apoi repetă cu restul vectorului. Face cele mai puține interschimbări (exact n-1), dar tot atât de multe comparații ca Bubble.',
+    desc2: 'Util când schimburile sunt scumpe. La examen te poate ajuta să-l folosești când problema cere „numărul minim de schimburi".',
+    best: 'O(n²)', avg: 'O(n²)', worst: 'O(n²)', space: 'O(1)', stable: 'Nu',
+    code: `<span class="kw">void</span> <span class="fn">selectionSort</span>(<span class="kw">int</span> v[], <span class="kw">int</span> n) {\n  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; n-<span class="num">1</span>; i++) {\n    <span class="kw">int</span> m = i;\n    <span class="kw">for</span> (<span class="kw">int</span> j = i+<span class="num">1</span>; j &lt; n; j++)\n      <span class="kw">if</span> (v[j] &lt; v[m]) m = j;\n    <span class="kw">if</span> (m != i) { <span class="kw">int</span> t=v[i]; v[i]=v[m]; v[m]=t; }\n  }\n}`
+  },
+  insertion: {
+    name: 'Insertion Sort', tagline: 'Sortare prin inserție · Ca la cărțile de joc',
+    desc: 'Construiește vectorul sortat un element pe rând, inserând fiecare element nou la poziția corectă în porțiunea deja sortată — exact cum sortezi cărțile de joc în mână.',
+    desc2: 'Cel mai bun algoritm simplu pentru vectori aproape sortați — poate atinge O(n) în cazul cel mai bun. Este și baza pentru variante hibride mai complexe.',
+    best: 'O(n)', avg: 'O(n²)', worst: 'O(n²)', space: 'O(1)', stable: 'Da',
+    code: `<span class="kw">void</span> <span class="fn">insertionSort</span>(<span class="kw">int</span> v[], <span class="kw">int</span> n) {\n  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt; n; i++) {\n    <span class="kw">int</span> cheie = v[i], j = i-<span class="num">1</span>;\n    <span class="kw">while</span> (j &gt;= <span class="num">0</span> &amp;&amp; v[j] &gt; cheie) { v[j+<span class="num">1</span>] = v[j]; j--; }\n    v[j+<span class="num">1</span>] = cheie;\n  }\n}`
+  },
+  merge: {
+    name: 'Merge Sort', tagline: 'Divide et Impera · Garanție O(n log n)',
+    desc: 'Împarte recursiv vectorul în două jumătăți, le sortează separat, apoi le combină (interclasează) într-un vector sortat. Este exemplul perfect de „divide et impera".',
+    desc2: 'Garantează O(n log n) indiferent de date. Dezavantaj: folosește memorie suplimentară O(n). La BAC apare ca problemă de recursivitate cu interclasare.',
+    best: 'O(n log n)', avg: 'O(n log n)', worst: 'O(n log n)', space: 'O(n)', stable: 'Da',
+    code: `<span class="kw">void</span> <span class="fn">merge</span>(<span class="kw">int</span> v[], <span class="kw">int</span> st, <span class="kw">int</span> mij, <span class="kw">int</span> dr) {\n  <span class="kw">int</span> aux[<span class="num">10000</span>], k=<span class="num">0</span>, i=st, j=mij+<span class="num">1</span>;\n  <span class="kw">while</span> (i&lt;=mij &amp;&amp; j&lt;=dr)\n    aux[k++] = (v[i]&lt;=v[j]) ? v[i++] : v[j++];\n  <span class="kw">while</span> (i&lt;=mij) aux[k++]=v[i++];\n  <span class="kw">while</span> (j&lt;=dr)  aux[k++]=v[j++];\n  <span class="kw">for</span> (<span class="kw">int</span> p=<span class="num">0</span>; p&lt;k; p++) v[st+p]=aux[p];\n}\n<span class="kw">void</span> <span class="fn">mergeSort</span>(<span class="kw">int</span> v[], <span class="kw">int</span> st, <span class="kw">int</span> dr) {\n  <span class="kw">if</span> (st &lt; dr) {\n    <span class="kw">int</span> mij = (st+dr)/<span class="num">2</span>;\n    <span class="fn">mergeSort</span>(v, st, mij); <span class="fn">mergeSort</span>(v, mij+<span class="num">1</span>, dr);\n    <span class="fn">merge</span>(v, st, mij, dr);\n  }\n}`
+  },
+  quick: {
+    name: 'Quick Sort', tagline: 'Divide et Impera · Cel mai rapid în practică',
+    desc: 'Alege un element „pivot", mută toate elementele mai mici la stânga și toate cele mai mari la dreapta, apoi aplică același proces recursiv pe cele două jumătăți.',
+    desc2: 'În medie este cel mai rapid algoritm din cei cinci. În cazul cel mai rău poate degenera la O(n²) dacă pivotul e ales prost, dar cu pivot aleator practic nu se întâmplă.',
+    best: 'O(n log n)', avg: 'O(n log n)', worst: 'O(n²)', space: 'O(log n)', stable: 'Nu',
+    code: `<span class="kw">int</span> <span class="fn">partition</span>(<span class="kw">int</span> v[], <span class="kw">int</span> st, <span class="kw">int</span> dr) {\n  <span class="kw">int</span> pivot=v[dr], i=st-<span class="num">1</span>;\n  <span class="kw">for</span> (<span class="kw">int</span> j=st; j&lt;dr; j++)\n    <span class="kw">if</span> (v[j]&lt;=pivot) { i++; <span class="kw">int</span> t=v[i]; v[i]=v[j]; v[j]=t; }\n  <span class="kw">int</span> t=v[i+<span class="num">1</span>]; v[i+<span class="num">1</span>]=v[dr]; v[dr]=t;\n  <span class="kw">return</span> i+<span class="num">1</span>;\n}\n<span class="kw">void</span> <span class="fn">quickSort</span>(<span class="kw">int</span> v[], <span class="kw">int</span> st, <span class="kw">int</span> dr) {\n  <span class="kw">if</span> (st &lt; dr) {\n    <span class="kw">int</span> p = <span class="fn">partition</span>(v, st, dr);\n    <span class="fn">quickSort</span>(v, st, p-<span class="num">1</span>); <span class="fn">quickSort</span>(v, p+<span class="num">1</span>, dr);\n  }\n}`
+  }
+};
+
+/* ── VISUALIZER STATE ── */
+const VIZ = {
+  arr: [], bars: [], size: 30, speed: 60,
+  algo: 'bubble', running: false, paused: false, abort: false,
+  comparisons: 0, swaps: 0,
+  barsEl: document.getElementById('vizBars'),
+  infoEl: document.getElementById('vizInfo')
+};
+
+function renderInfo() {
+  const a = ALGO_INFO[VIZ.algo];
+  VIZ.infoEl.innerHTML = `
+    <div class="viz-meta">${a.tagline}</div>
+    <h3>${a.name}</h3>
+    <p>${a.desc}</p>
+    <p>${a.desc2}</p>
+    <dl class="viz-complexity">
+      <dt>Cel mai bun caz</dt><dd><strong>${a.best}</strong></dd>
+      <dt>Caz mediu</dt><dd><strong>${a.avg}</strong></dd>
+      <dt>Cel mai rău caz</dt><dd><strong>${a.worst}</strong></dd>
+      <dt>Memorie extra</dt><dd><strong>${a.space}</strong></dd>
+      <dt>Stabil</dt><dd><strong>${a.stable}</strong></dd>
+    </dl>
+    <div class="viz-stats">
+      <div class="viz-stat"><div class="l">Comparații</div><div class="v" id="sCmp">${VIZ.comparisons}</div></div>
+      <div class="viz-stat"><div class="l">Interschimbări</div><div class="v" id="sSwp">${VIZ.swaps}</div></div>
+    </div>
+    <div class="code-block">${a.code}</div>`;
+}
+function updateStats() {
+  const c = document.getElementById('sCmp'), s = document.getElementById('sSwp');
+  if (c) c.textContent = VIZ.comparisons;
+  if (s) s.textContent = VIZ.swaps;
+}
+function buildArray() {
+  VIZ.arr = []; VIZ.bars = []; VIZ.barsEl.innerHTML = '';
+  VIZ.comparisons = 0; VIZ.swaps = 0;
+  for (let i = 0; i < VIZ.size; i++) {
+    const val = 5 + Math.random() * 93;
+    VIZ.arr.push(val);
+    const b = document.createElement('div');
+    b.className = 'viz-bar';
+    b.style.height = val + '%';
+    VIZ.barsEl.appendChild(b);
+    VIZ.bars.push(b);
+  }
+}
+function delay() {
+  return new Promise(r => setTimeout(r, 5 + (100 - VIZ.speed) * 4));
+}
+async function tick() {
+  while (VIZ.paused && !VIZ.abort) await new Promise(r => setTimeout(r, 80));
+  if (VIZ.abort) throw new Error('abort');
+  await delay();
+}
+function setH(i, v) { VIZ.arr[i] = v; VIZ.bars[i].style.height = v + '%'; }
+function mark(idxs, cls) { idxs.forEach(i => VIZ.bars[i] && VIZ.bars[i].classList.add(cls)); }
+function unmark(idxs, cls) { idxs.forEach(i => VIZ.bars[i] && VIZ.bars[i].classList.remove(cls)); }
+function clearAll() { VIZ.bars.forEach(b => b.className = 'viz-bar'); }
+
+/* ── BUBBLE ── */
+async function runBubble() {
+  const n = VIZ.arr.length;
+  for (let i = 0; i < n - 1; i++) {
+    let swapped = false;
+    for (let j = 0; j < n - i - 1; j++) {
+      mark([j, j+1], 'comparing'); VIZ.comparisons++; updateStats(); await tick();
+      if (VIZ.arr[j] > VIZ.arr[j+1]) {
+        unmark([j, j+1], 'comparing'); mark([j, j+1], 'swapping');
+        const t = VIZ.arr[j]; setH(j, VIZ.arr[j+1]); setH(j+1, t);
+        VIZ.swaps++; updateStats(); swapped = true; await tick();
+        unmark([j, j+1], 'swapping');
+      } else { unmark([j, j+1], 'comparing'); }
+    }
+    mark([n-1-i], 'sorted');
+    if (!swapped) { for (let k = 0; k <= n-1-i; k++) mark([k], 'sorted'); break; }
+  }
+  mark([0], 'sorted');
+}
+
+/* ── SELECTION ── */
+async function runSelection() {
+  const n = VIZ.arr.length;
+  for (let i = 0; i < n - 1; i++) {
+    let m = i; mark([m], 'pivot');
+    for (let j = i + 1; j < n; j++) {
+      mark([j], 'comparing'); VIZ.comparisons++; updateStats(); await tick();
+      unmark([j], 'comparing');
+      if (VIZ.arr[j] < VIZ.arr[m]) { unmark([m], 'pivot'); m = j; mark([m], 'pivot'); }
+    }
+    unmark([m], 'pivot');
+    if (m !== i) {
+      mark([i, m], 'swapping');
+      const t = VIZ.arr[i]; setH(i, VIZ.arr[m]); setH(m, t);
+      VIZ.swaps++; updateStats(); await tick(); unmark([i, m], 'swapping');
+    }
+    mark([i], 'sorted');
+  }
+  mark([VIZ.arr.length-1], 'sorted');
+}
+
+/* ── INSERTION ── */
+async function runInsertion() {
+  const n = VIZ.arr.length;
+  mark([0], 'sorted');
+  for (let i = 1; i < n; i++) {
+    const key = VIZ.arr[i]; let j = i - 1;
+    mark([i], 'pivot'); await tick();
+    while (j >= 0 && VIZ.arr[j] > key) {
+      mark([j], 'comparing'); VIZ.comparisons++; updateStats(); await tick();
+      setH(j+1, VIZ.arr[j]); VIZ.swaps++; updateStats();
+      unmark([j], 'comparing'); j--;
+    }
+    setH(j+1, key); unmark([i], 'pivot');
+    for (let k = 0; k <= i; k++) mark([k], 'sorted');
+  }
+}
+
+/* ── MERGE ── */
+async function runMerge() { await mSort(0, VIZ.arr.length - 1); }
+async function mSort(st, dr) {
+  if (st >= dr) return;
+  const mid = Math.floor((st + dr) / 2);
+  await mSort(st, mid); await mSort(mid+1, dr); await mMerge(st, mid, dr);
+}
+async function mMerge(st, mid, dr) {
+  const aux = []; let i = st, j = mid + 1;
+  while (i <= mid && j <= dr) {
+    for (let k = st; k <= dr; k++) VIZ.bars[k].classList.remove('comparing');
+    mark([i, j], 'comparing'); VIZ.comparisons++; updateStats(); await tick();
+    aux.push(VIZ.arr[i] <= VIZ.arr[j] ? VIZ.arr[i++] : VIZ.arr[j++]);
+  }
+  while (i <= mid) aux.push(VIZ.arr[i++]);
+  while (j <= dr)  aux.push(VIZ.arr[j++]);
+  for (let k = st; k <= dr; k++) VIZ.bars[k].classList.remove('comparing');
+  for (let p = 0; p < aux.length; p++) {
+    setH(st + p, aux[p]); VIZ.swaps++; updateStats();
+    mark([st+p], 'swapping'); await tick(); unmark([st+p], 'swapping');
+    mark([st+p], 'sorted');
+  }
+}
+
+/* ── QUICK ── */
+async function runQuick() { await qSort(0, VIZ.arr.length - 1); }
+async function qSort(st, dr) {
+  if (st >= dr) { if (st === dr) mark([st], 'sorted'); return; }
+  const p = await qPartition(st, dr);
+  mark([p], 'sorted');
+  await qSort(st, p - 1);
+  await qSort(p + 1, dr);
+}
+async function qPartition(st, dr) {
+  const pivot = VIZ.arr[dr];
+  mark([dr], 'pivot');
+  let i = st - 1;
+  for (let j = st; j < dr; j++) {
+    mark([j], 'comparing'); VIZ.comparisons++; updateStats(); await tick();
+    if (VIZ.arr[j] <= pivot) {
+      i++;
+      if (i !== j) {
+        mark([i, j], 'swapping');
+        const t = VIZ.arr[i]; setH(i, VIZ.arr[j]); setH(j, t);
+        VIZ.swaps++; updateStats(); await tick(); unmark([i, j], 'swapping');
+      }
+    }
+    unmark([j], 'comparing');
+  }
+  unmark([dr], 'pivot');
+  const pos = i + 1;
+  if (pos !== dr) {
+    mark([pos, dr], 'swapping');
+    const t = VIZ.arr[pos]; setH(pos, VIZ.arr[dr]); setH(dr, t);
+    VIZ.swaps++; updateStats(); await tick(); unmark([pos, dr], 'swapping');
+  }
+  return pos;
+}
+
+const ALGOS = { bubble: runBubble, selection: runSelection, insertion: runInsertion, merge: runMerge, quick: runQuick };
+
+/* ── RUN CONTROLLER ── */
+async function startSort() {
+  VIZ.running = true; VIZ.paused = false; VIZ.abort = false;
+  VIZ.comparisons = 0; VIZ.swaps = 0;
+  clearAll();
+  document.getElementById('btnStart').disabled = true;
+  document.getElementById('btnShuffle').disabled = true;
+  try {
+    await ALGOS[VIZ.algo]();
+    VIZ.bars.forEach(b => b.classList.add('sorted'));
+  } catch(e) { /* aborted */ }
+  VIZ.running = false;
+  document.getElementById('btnStart').disabled = false;
+  document.getElementById('btnShuffle').disabled = false;
+}
+
+/* ── CONTROLS ── */
+document.getElementById('btnStart').addEventListener('click', () => { if (!VIZ.running) startSort(); });
+document.getElementById('btnPause').addEventListener('click', function() {
+  VIZ.paused = !VIZ.paused;
+  this.textContent = VIZ.paused ? '▶ Continuă' : '⏸ Pauză';
+});
+document.getElementById('btnReset').addEventListener('click', () => {
+  VIZ.abort = true;
+  setTimeout(() => { buildArray(); renderInfo(); }, 120);
+});
+document.getElementById('btnShuffle').addEventListener('click', () => {
+  if (!VIZ.running) { buildArray(); renderInfo(); }
+});
+document.getElementById('sizeSlider').addEventListener('input', function() {
+  VIZ.size = +this.value;
+  document.getElementById('sizeVal').textContent = VIZ.size;
+  if (!VIZ.running) { buildArray(); renderInfo(); }
+});
+document.getElementById('speedSlider').addEventListener('input', function() { VIZ.speed = +this.value; });
+
+document.querySelectorAll('.viz-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.viz-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    VIZ.abort = true;
+    VIZ.algo = this.dataset.algo;
+    setTimeout(() => { buildArray(); renderInfo(); }, 120);
+  });
+});
+
+/* ── QUIZ ── */
+const QUIZ = [
+  {
+    q: 'Care este complexitatea în cazul cel mai rău pentru Bubble Sort?',
+    opts: ['O(n)', 'O(n log n)', 'O(n²)', 'O(log n)'],
+    ok: 2,
+    exp: 'Bubble Sort compară fiecare pereche de vecini pentru fiecare din cele n treceri — total n·(n-1)/2 comparații, adică O(n²). Cazul cel mai bun (vector sortat, cu optimizare) este O(n).'
+  },
+  {
+    q: 'Care algoritm garantează O(n log n) indiferent de datele de intrare?',
+    opts: ['Quick Sort', 'Bubble Sort', 'Merge Sort', 'Insertion Sort'],
+    ok: 2,
+    exp: 'Merge Sort împarte vectorul exact pe jumătate la fiecare nivel (log n niveluri) și face O(n) muncă pe fiecare nivel → O(n log n) garantat. Quick Sort poate degenera la O(n²) cu pivot ales prost.'
+  },
+  {
+    q: 'Ce înseamnă că un algoritm de sortare este „stabil"?',
+    opts: ['Rulează mereu în același timp', 'Elementele egale rămân în ordinea lor relativă inițială', 'Nu folosește memorie suplimentară', 'Funcționează pentru orice tip de date'],
+    ok: 1,
+    exp: 'Stabilitatea garantează că dacă avem două elemente egale, cel care apărea primul în vectorul inițial va rămâne primul și după sortare. Bubble, Merge și Insertion Sort sunt stabile; Selection și Quick Sort (varianta clasică) nu sunt.'
+  },
+  {
+    q: 'Care este principiul „Divide et Impera"?',
+    opts: ['Caută minimul și pune-l la început', 'Împarte problema în subprobleme mai mici, rezolvă-le recursiv, combină rezultatele', 'Interschimbă vecinii până sunt în ordine', 'Inserează fiecare element la locul lui'],
+    ok: 1,
+    exp: 'Divide et Impera: (1) Divide — împarte în subprobleme mai mici, (2) Impera — rezolvă recursiv fiecare, (3) Combină — unește soluțiile. Merge Sort și Quick Sort sunt exemple clasice.'
+  },
+  {
+    q: 'De ce Quick Sort este mai rapid în practică decât Merge Sort, deși ambele sunt O(n log n) în medie?',
+    opts: ['Face mai puține comparații matematic', 'Lucrează in-place, cu acces la memorie mai eficient și cache mai prietenos', 'Nu este recursiv', 'Merge Sort are cazul cel mai rău O(n²)'],
+    ok: 1,
+    exp: 'Merge Sort alocă O(n) memorie suplimentară pentru interclasare — mai multe accese la RAM, mai puțin prietenos cu cache-ul. Quick Sort lucrează in-place (O(log n) pentru recursivitate) și are o constantă mai mică în practică — de aceea std::sort din C++ e bazat pe Quick Sort.'
+  }
+];
+
+let qIdx = 0, qAnswered = false;
+const LETTERS = ['A', 'B', 'C', 'D'];
+
+function renderQuiz() {
+  const q = QUIZ[qIdx];
+  document.getElementById('quizCard').innerHTML = `
+    <div class="quiz-qnum">Întrebarea ${qIdx+1} din ${QUIZ.length}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((o, i) => `<button class="quiz-opt" onclick="answerQ(${i})"><span class="letter">${LETTERS[i]}</span>${o}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qFb"></div>
+    <div class="quiz-nav">
+      <span class="quiz-progress">${qIdx+1} / ${QUIZ.length}</span>
+      <button class="btn" id="qNext" style="display:none" onclick="${qIdx < QUIZ.length-1 ? 'nextQ()' : 'restartQ()'}">${qIdx < QUIZ.length-1 ? 'Următor →' : 'Reîncepe ↻'}</button>
+    </div>`;
+  qAnswered = false;
+}
+
+window.answerQ = function(idx) {
+  if (qAnswered) return;
+  qAnswered = true;
+  const q = QUIZ[qIdx];
+  document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.quiz-opt')[idx].classList.add(idx === q.ok ? 'correct' : 'incorrect');
+  if (idx !== q.ok) document.querySelectorAll('.quiz-opt')[q.ok].classList.add('correct');
+  const fb = document.getElementById('qFb');
+  fb.className = 'quiz-feedback show ' + (idx === q.ok ? 'ok' : 'no');
+  fb.textContent = (idx === q.ok ? '✓ Corect! ' : '✗ Greșit. ') + q.exp;
+  document.getElementById('qNext').style.display = 'inline-flex';
+};
+window.nextQ = function() { qIdx++; renderQuiz(); };
+window.restartQ = function() { qIdx = 0; renderQuiz(); };
+
+/* ── REVEAL ON SCROLL ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── ACTIVE NAV ── */
+const navLinks = document.querySelectorAll('.topnav a');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const l = document.querySelector(`.topnav a[href="#${e.target.id}"]`);
+      if (l) l.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+document.querySelectorAll('section[id]').forEach(s => navObs.observe(s));
+
+/* ── INIT ── */
+buildArray();
+renderInfo();
+renderQuiz();
+</script>
+</body>
+</html>
