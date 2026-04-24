@@ -1,0 +1,116 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: url(https://i.etsystatic.com/isla/3d7484/54217808/isla_fullxfull.54217808_nm450hhb.jpg?version=0);
+}
+
+header {
+    background-color: #0dd6e9;
+    color: rgb(11, 11, 2);
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header .back-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0e0101;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.zone-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.zone-list li {
+    margin: 15px 0;
+}
+
+.zone-list a {
+    text-decoration: none;
+    background-color: #0fd0ea;
+    color: rgb(18, 9, 15);
+    padding: 15px 20px;
+    display: block;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+.zone-list a:hover {
+    background-color: #e6f20b;
+}
+
+.detalii {
+    max-width: 700px;
+    background: #144a59;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(230, 16, 197, 0.1);
+    list-style: none;
+}
+
+.detalii li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #cbdad4;
+    padding: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 200px;
+    margin: 0 auto;
+    background-color: rgb(68, 231, 220);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #08e7be;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    background-color: #0ce94b;
+    color: rgb(18, 14, 14);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #09adf3;
+}
