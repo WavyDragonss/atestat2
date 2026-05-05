@@ -1,5 +1,8 @@
+/* ===== MARAMUREȘ =====
+   Culori calde, maro-pământ, ca lemnul tradițional. */
+
 body {
-    font-family: 'Courier New', Courier, monospace;
+    /*font-family: 'Courier New', Courier, monospace;*/
     background-color: #f0efe9;
     color: #6a4c3b;
     margin: 0;
@@ -14,7 +17,8 @@ header {
     border-bottom: 3px solid #6a4c3b;
 }
 
-.back-link {
+/* Linkul "Înapoi la pagina principală" */
+.inapoi {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -29,7 +33,7 @@ header {
     transition: background 0.2s;
 }
 
-.back-link:hover {
+.inapoi:hover {
     background: rgba(255,255,255,0.35);
 }
 
@@ -42,22 +46,22 @@ main {
     box-shadow: 0 6px 14px rgba(160, 122, 82, 0.5);
 }
 
-.content-wrap {
+.continut {
     display: flex;
     gap: 30px;
     align-items: flex-start;
     flex-wrap: wrap;
 }
 
-.content-wrap.image-right { flex-direction: row; }
-.content-wrap.image-left  { flex-direction: row-reverse; }
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
 
-.text-block {
+.bloc-text {
     flex: 1;
     min-width: 260px;
 }
 
-.side-img {
+.imagine-laterala {
     width: 300px;
     max-width: 100%;
     border-radius: 14px;

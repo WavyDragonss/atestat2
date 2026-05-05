@@ -1,19 +1,43 @@
+/* ===== STILURI PAGINA PRINCIPALĂ ===== */
+
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    background: url(https://i.etsystatic.com/isla/3d7484/54217808/isla_fullxfull.54217808_nm450hhb.jpg?version=0);
+    background-color: #e1a8bd;
 }
 
+/* Antetul paginii - bara roz de sus.
+   Se întinde de la o margine la alta a ecranului și până sus de tot. */
 header {
-    background-color: #0dd6e9;
+    /* Gradient = trecere lină de la o nuanță roz la alta, dintr-o parte în alta */
+    background: linear-gradient(90deg, #ec5390 0%, #f178a8 50%, #ec5390 100%);
     color: rgb(11, 11, 2);
-    padding: 30px 20px;
+    padding: 35px 20px;
     text-align: center;
+    /* Lățime completă, fără spații pe margini */
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    /* Umbră ușoară sub antet ca să arate mai curat */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
-header .back-link {
+/* Titlul mare din antet - puțin spațiat ca să arate mai îngrijit */
+header h1 {
+    margin: 0 0 8px;
+    letter-spacing: 2px;
+}
+
+/* Paragrafele din antet - mai subtile */
+header p {
+    margin: 6px auto;
+    max-width: 800px;
+}
+
+/* Linkul "Înapoi" din antet */
+header .inapoi {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 0px;
     color: #0e0101;
     text-decoration: none;
     font-weight: bold;
@@ -25,21 +49,22 @@ main {
     justify-content: center;
 }
 
-.zone-list {
+/* Lista cu regiunile României (butoanele întunecate) */
+.lista-regiuni {
     list-style: none;
     padding: 0;
     width: 100%;
     max-width: 600px;
 }
 
-.zone-list li {
+.lista-regiuni li {
     margin: 15px 0;
 }
 
-.zone-list a {
+.lista-regiuni a {
     text-decoration: none;
-    background-color: #0fd0ea;
-    color: rgb(18, 9, 15);
+    background-color: #000010;
+    color: rgb(255, 255, 255);
     padding: 15px 20px;
     display: block;
     border-radius: 8px;
@@ -47,13 +72,14 @@ main {
     transition: background 0.3s;
 }
 
-.zone-list a:hover {
-    background-color: #e6f20b;
+.lista-regiuni a:hover {
+    background-color: #e8a1bb;
 }
 
+/* Lista cu detalii (folosită pe paginile regiunilor) */
 .detalii {
     max-width: 700px;
-    background: #144a59;
+    background: #ffb6c1;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 6px 16px rgba(230, 16, 197, 0.1);
@@ -65,10 +91,13 @@ main {
     line-height: 1.6;
 }
 
+/* ===== STILURI FORMULAR ===== */
+/* Notă: am scos "padding: 10px" de pe body ca antetul să se lipească
+   complet de marginile ecranului (sus, stânga, dreapta). */
+
 body {
     font-family: sans-serif;
-    background-color: #cbdad4;
-    padding: 10px;
+    background-color: #e8a1bb;
 }
 
 h2 {
@@ -79,7 +108,7 @@ h2 {
 form {
     max-width: 200px;
     margin: 0 auto;
-    background-color: rgb(68, 231, 220);
+    background-color: rgb(255, 231, 220);
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
@@ -104,13 +133,13 @@ button {
     margin-top: 15px;
     padding: 10px;
     width: 100%;
-    background-color: #0ce94b;
-    color: rgb(18, 14, 14);
+    background-color: #175e44;
+    color: rgb(255, 14, 14);
     border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #09adf3;
+    background-color: #e1a8bd;
 }
