@@ -6,6 +6,27 @@ body {
     background-color: #e1a8bd;
 }
 
+/* Tabelul cu Profesor coordonator / Elev candidat din colțul
+   stânga-sus al headerului. Folosește "position: absolute" ca să stea
+   peste header fără să afecteze textul centrat. Are fundal semi-transparent
+   ca să rămână lizibil peste gradientul violet. */
+.tabel-autori {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.tabel-autori td {
+    padding: 2px 4px;
+}
+
 /* Antetul paginii - bara roz de sus.
    Se întinde de la o margine la alta a ecranului și până sus de tot. */
 header {
