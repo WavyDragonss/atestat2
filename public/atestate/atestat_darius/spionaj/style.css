@@ -1,0 +1,82 @@
+/* ===== SPIONAJ ȘI PROPAGANDĂ =====
+   Culori grafit/cărbune — secret, umbră, agenți dublii. */
+
+body {
+    font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+    background-color: #1c1c1f;
+    color: #d6d6d6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2a2a2e;
+    color: #e5e5e5;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 3px solid #8b1e1e;
+}
+
+/* Linkul "Înapoi la pagina principală" */
+.inapoi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.10);
+    border-radius: 20px;
+    color: #e5e5e5;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.inapoi:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: #26262a;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+}
+
+.continut {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
+
+.bloc-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.imagine-laterala {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    object-fit: cover;
+}
+
+.detalii {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detalii li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}

@@ -1,0 +1,111 @@
+/* ===== STILURI PAGINA PRINCIPALĂ =====
+   Paletă: cărbune (charcoal) + verde forest + bronz */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #1f2421;
+    color: #e8e5d8;
+}
+
+/* Tabelul cu Profesor coordonator / Elev candidat din colțul
+   stânga-sus al headerului. */
+.tabel-autori {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.10);
+    color: #f3efe2;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.tabel-autori td {
+    padding: 2px 4px;
+}
+
+/* Antetul paginii - bara de sus.
+   Gradient = trecere lină de la o nuanță la alta. */
+header {
+    position: relative;
+    background: linear-gradient(90deg, #14201a 0%, #1f3a2c 50%, #14201a 100%);
+    color: #f3efe2;
+    padding: 35px 20px;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    border-bottom: 3px solid #b8762d;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    letter-spacing: 2px;
+}
+
+header p {
+    margin: 6px auto;
+    max-width: 800px;
+}
+
+header .inapoi {
+    display: inline-block;
+    margin-top: 0px;
+    color: #f3efe2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Lista cu secțiunile (butoanele întunecate) */
+.lista-regiuni {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.lista-regiuni li {
+    margin: 15px 0;
+}
+
+.lista-regiuni a {
+    text-decoration: none;
+    background-color: #14201a;
+    color: #f3efe2;
+    padding: 15px 20px;
+    display: block;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background 0.3s, border-left-color 0.3s;
+    border-left: 4px solid #b8762d;
+}
+
+.lista-regiuni a:hover {
+    background-color: #2d4a38;
+    border-left-color: #d4a85a;
+}
+
+/* Lista cu detalii (folosită pe paginile de secțiuni) */
+.detalii {
+    max-width: 700px;
+    background: #243029;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    list-style: none;
+}
+
+.detalii li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}

@@ -1,0 +1,81 @@
+/* ===== METODOLOGIE ȘI CHESTIONAR =====
+   Culori navy/auriu — atmosferă academică, formală, de cercetare. */
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', Geneva, Verdana, sans-serif;
+    background-color: #eef2ff;
+    color: #1f2a44;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1f3a6b;
+    color: #f4e3b2;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 4px solid #c9a227;
+}
+
+.inapoi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    color: #f4e3b2;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.inapoi:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: #fdf9ed;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(31, 58, 107, 0.35);
+}
+
+.continut {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
+
+.bloc-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.imagine-laterala {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+.detalii {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detalii li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}

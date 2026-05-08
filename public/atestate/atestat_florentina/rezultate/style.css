@@ -1,0 +1,81 @@
+/* ===== REZULTATELE CERCETĂRII =====
+   Culori teal/cyan — date, grafice, statistici. */
+
+body {
+    background-color: #ecfeff;
+    color: #134e4a;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #0f766e;
+    color: #ccfbf1;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 3px solid #134e4a;
+}
+
+/* Linkul "Înapoi la pagina principală" */
+.inapoi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    color: #ccfbf1;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.inapoi:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: #f0fdfa;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(15, 118, 110, 0.5);
+}
+
+.continut {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
+
+.bloc-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.imagine-laterala {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+.detalii {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detalii li {
+    margin-bottom: 16px;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}

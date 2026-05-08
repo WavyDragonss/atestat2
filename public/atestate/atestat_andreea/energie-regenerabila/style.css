@@ -1,0 +1,86 @@
+/* ===== IMPACTUL ASUPRA SĂNĂTĂȚII MINTALE =====
+   Culori violet/lavandă — calm, reflexie, sănătate emoțională. */
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    /* Fundal cu gradient = trecere de la o culoare la alta */
+    background: linear-gradient(to bottom right, #4c1d95, #7c3aed);
+    color: #ede9fe;
+    margin: 0;
+    padding: 0;
+}
+
+/* Antetul */
+header {
+    background-color: #2e1065;
+    color: #ddd6fe;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 4px solid #a78bfa;
+}
+
+/* Linkul "Înapoi la pagina principală" */
+.inapoi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(221,214,254,0.2);
+    border-radius: 20px;
+    color: #ddd6fe;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.inapoi:hover {
+    background: rgba(221,214,254,0.38);
+}
+
+/* Cutia principală cu conținut */
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: rgba(46, 16, 101, 0.85);
+    padding: 30px 25px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(46, 16, 101, 0.8);
+}
+
+/* Container text + imagine */
+.continut {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
+
+.bloc-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.imagine-laterala {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    object-fit: cover;
+}
+
+.detalii {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detalii li {
+    margin-bottom: 14px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}

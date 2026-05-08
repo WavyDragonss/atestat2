@@ -1,0 +1,84 @@
+/* ===== BIBLIOGRAFIE =====
+   Culori chihlimbar/maro — referințe, surse, hârtie, cărți. */
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', Geneva, Verdana, sans-serif;
+    background-color: #fdf3e1;
+    color: #5a3a1f;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #b8862c;
+    color: #fff8e6;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 4px solid #8a6420;
+}
+
+/* Linkul "Înapoi la pagina principală" */
+.inapoi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    color: #fff3d1;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.inapoi:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: #fffaf0;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(184, 134, 44, 0.5);
+}
+
+.continut {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.bloc-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.detalii {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detalii li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Linkurile din lista de surse */
+.detalii a {
+    color: #8a4b1c;
+    text-decoration: none;
+    border-bottom: 1px dashed #b8862c;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.detalii a:hover {
+    color: #5a3a1f;
+    border-bottom-color: #5a3a1f;
+}

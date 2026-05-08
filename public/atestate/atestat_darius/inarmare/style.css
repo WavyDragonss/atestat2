@@ -1,0 +1,85 @@
+/* ===== CURSA ÎNARMĂRII =====
+   Culori militar/oliv — armată, putere, industrie de război. */
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    background: linear-gradient(to bottom right, #1a1f0f, #3b4a1f);
+    color: #e7ead4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Antetul */
+header {
+    background-color: #2b3514;
+    color: #e7ead4;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 4px solid #6b7a2e;
+}
+
+/* Linkul "Înapoi la pagina principală" */
+.inapoi {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(231,234,212,0.15);
+    border-radius: 20px;
+    color: #e7ead4;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.inapoi:hover {
+    background: rgba(231,234,212,0.32);
+}
+
+/* Cutia principală cu conținut */
+main {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: rgba(43, 53, 20, 0.85);
+    padding: 30px 25px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Container text + imagine */
+.continut {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
+
+.bloc-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.imagine-laterala {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+    object-fit: cover;
+}
+
+.detalii {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detalii li {
+    margin-bottom: 14px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
