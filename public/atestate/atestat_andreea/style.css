@@ -34,7 +34,7 @@ body {
 header {
     position: relative;
     /* Gradient = trecere lină de la o nuanță la alta, dintr-o parte în alta */
-    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #6366f1 100%);
+    background: linear-gradient(90deg, #65b13c 0%, #5c9f38 50%, #548A37 100%);
     color: rgb(255, 255, 255);
     padding: 35px 20px;
     text-align: center;
@@ -42,6 +42,7 @@ header {
     width: 100%;
     margin: 0;
     box-sizing: border-box;
+    border-bottom: 6px solid #48762f;
     /* Umbră ușoară sub antet ca să arate mai curat */
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
@@ -121,7 +122,7 @@ main {
 
 body {
     font-family: sans-serif;
-    background-color: #c7d2fe;
+    background-color: #D3D3D3;
 }
 
 h2 {

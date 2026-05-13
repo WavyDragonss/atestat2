@@ -1,31 +1,30 @@
-/* ===== BIBLIOGRAFIE =====
-   Culori chihlimbar/maro — referințe, surse, hârtie, cărți. */
+/* ===== INTRODUCERE =====
+   Paletă neagră / roșu sânge — gravitate, avertisment. */
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', Geneva, Verdana, sans-serif;
-    background-color: #fdf3e1;
-    color: #5a3a1f;
+    background-color: #14110f;
+    color: #f5e6d3;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #d5ff87;
-    color: #000000;
+    background-color: #1a0d0a;
+    color: #fdf6e3;
     padding: 30px 20px;
     text-align: center;
-    border-bottom: 4px solid #8fac59;
+    border-bottom: 4px solid #d62828;
 }
 
-/* Linkul "Înapoi la pagina principală" */
 .inapoi {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 8px 18px;
-    background: rgba(0, 0, 0, 0.396);
+    background: rgba(255,255,255,0.10);
     border-radius: 20px;
-    color: #fff3d1;
+    color: #fdf6e3;
     text-decoration: none;
     font-weight: bold;
     margin-top: 14px;
@@ -34,16 +33,16 @@ header {
 }
 
 .inapoi:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(247, 127, 0, 0.30);
 }
 
 main {
     max-width: 960px;
     margin: 40px auto;
-    background-color: #fffaf0;
+    background-color: #211814;
     padding: 30px 25px;
     border-radius: 15px;
-    box-shadow: 0 6px 18px rgba(184, 134, 44, 0.5);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
 }
 
 .continut {
@@ -53,9 +52,20 @@ main {
     flex-wrap: wrap;
 }
 
+.continut.imagine-dreapta { flex-direction: row; }
+.continut.imagine-stanga  { flex-direction: row-reverse; }
+
 .bloc-text {
     flex: 1;
     min-width: 260px;
+}
+
+.imagine-laterala {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+    object-fit: cover;
 }
 
 .detalii {
@@ -70,15 +80,18 @@ main {
     line-height: 1.7;
 }
 
-/* Linkurile din lista de surse */
+.detalii strong {
+    color: #ffb347;
+}
+
 .detalii a {
-    color: #8a4b1c;
+    color: #f77f00;
     text-decoration: none;
-    border-bottom: 1px dashed #b8862c;
+    border-bottom: 1px dashed #d62828;
     transition: color 0.2s, border-color 0.2s;
 }
 
 .detalii a:hover {
-    color: #5a3a1f;
-    border-bottom-color: #5a3a1f;
+    color: #ffd6a5;
+    border-bottom-color: #ffd6a5;
 }

@@ -1,0 +1,85 @@
+/* ===== STILURI PAGINA PRINCIPALĂ — Fumatul Ucide =====
+   Paletă: negru fum / roșu avertisment / portocaliu jăratic. */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #14110f;
+}
+
+.tabel-autori {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5e6d3;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.tabel-autori td {
+    padding: 2px 4px;
+}
+
+header {
+    position: relative;
+    background: linear-gradient(90deg, #1a0d0a 0%, #3a1410 50%, #1a0d0a 100%);
+    color: #fdf6e3;
+    padding: 35px 20px;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+    border-bottom: 3px solid #d62828;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    letter-spacing: 2px;
+    color: #ffd6a5;
+    text-shadow: 0 2px 8px rgba(214, 40, 40, 0.55);
+}
+
+header p {
+    margin: 6px auto;
+    max-width: 800px;
+    color: #f5e6d3;
+}
+
+main {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.lista-regiuni {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.lista-regiuni li {
+    margin: 15px 0;
+}
+
+.lista-regiuni a {
+    text-decoration: none;
+    background-color: #261814;
+    color: #fdf6e3;
+    padding: 15px 20px;
+    display: block;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background 0.3s, border-left-color 0.3s;
+    border-left: 4px solid #d62828;
+}
+
+.lista-regiuni a:hover {
+    background-color: #3a201a;
+    border-left-color: #f77f00;
+}
