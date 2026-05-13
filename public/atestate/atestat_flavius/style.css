@@ -1,0 +1,406 @@
+/* ===== Reset & variabile ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:       #0a0a0a;
+  --surface:  #161616;
+  --surface-2:#1f1f1f;
+  --border:   #2a2a2a;
+  --border-2: #3a3a3a;
+  --text:     #f0f0f0;
+  --muted:    #999999;
+  --faint:    #666666;
+  --red:      #e63946;
+  --red-d:    #c1121f;
+  --red-l:    #ff5a6b;
+  --serif:    Georgia, "Times New Roman", serif;
+  --mono:     Consolas, "Courier New", monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--serif);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.r { color: var(--red); }
+
+/* ===== Header ===== */
+.top {
+  position: sticky;
+  top: 0;
+  background: rgba(10, 10, 10, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--red);
+  z-index: 50;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1.1rem;
+  font-size: 0.92rem;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--red); }
+nav a:first-child { margin-left: 0; }
+
+/* ===== Generale ===== */
+section {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 70px;
+}
+section:last-of-type { border-bottom: none; }
+
+h1 {
+  font-size: 2.8rem;
+  font-weight: normal;
+  line-height: 1.1;
+  margin: 1rem 0 1.5rem;
+}
+h2 {
+  font-size: 1.9rem;
+  font-weight: normal;
+  margin-bottom: 0.4rem;
+  border-bottom: 3px solid var(--red);
+  padding-bottom: 0.4rem;
+  display: inline-block;
+}
+h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+  color: var(--red);
+}
+h4 {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--red);
+}
+.lead {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 680px;
+  margin-bottom: 2rem;
+}
+.sub {
+  color: var(--muted);
+  margin: 1rem 0 2rem;
+  max-width: 760px;
+}
+
+p { margin-bottom: 0.8rem; color: var(--text); }
+ul, ol { margin: 0.5rem 0 0.8rem 1.5rem; color: var(--text); }
+ul li, ol li { padding: 0.2rem 0; }
+
+/* ===== Hero card cu nume ===== */
+.card-info {
+  border: 2px solid var(--red);
+  background: var(--surface);
+  padding: 1.2rem 1.5rem;
+  max-width: 620px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.row:last-child { border-bottom: none; }
+.k {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.v {
+  font-weight: bold;
+  color: var(--red);
+}
+
+/* ===== Blocuri de teorie ===== */
+.block {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1.1rem;
+  border-left: 3px solid var(--red);
+}
+.block h3 {
+  margin-bottom: 0.7rem;
+}
+.block p {
+  font-size: 0.97rem;
+  color: var(--text);
+}
+.block ul, .block ol {
+  font-size: 0.96rem;
+  color: var(--text);
+}
+.block .nota {
+  margin-top: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--bg);
+  border-left: 2px solid var(--red);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.block .nota strong { color: var(--red); }
+
+/* ===== Tabel ===== */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.92rem;
+}
+.tbl th, .tbl td {
+  border: 1px solid var(--border-2);
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+}
+.tbl th {
+  background: var(--bg);
+  color: var(--red);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+.tbl td code {
+  font-family: var(--mono);
+  color: var(--red-l);
+  font-size: 0.92rem;
+}
+
+/* ===== Cod ===== */
+.code {
+  background: #000000;
+  color: #e8e8e8;
+  padding: 0.9rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  margin: 0.8rem 0;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  white-space: pre;
+}
+.code .kw { color: var(--red-l); font-weight: bold; }
+.code .num { color: #ffd166; }
+.code .str { color: #95d5b2; }
+.code .cm { color: var(--faint); font-style: italic; }
+.code .ty { color: #8ecae6; }
+
+/* cod inline */
+p code, li code, .block code {
+  font-family: var(--mono);
+  background: var(--bg);
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--border);
+  color: var(--red-l);
+  font-size: 0.88em;
+  border-radius: 2px;
+}
+
+/* etichetă tip */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--red);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* ===== Sortari: grid 2 coloane ===== */
+.sort-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* ===== Quiz ===== */
+#quiz {
+  max-width: 760px;
+}
+.quiz-box {
+  border: 2px solid var(--red);
+  background: var(--surface);
+  padding: 1.5rem 1.7rem;
+}
+.q-count {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.6rem;
+}
+.q-text {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+}
+.q-text code {
+  font-family: var(--mono);
+  background: var(--bg);
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--border);
+  color: var(--red-l);
+  font-size: 0.9em;
+}
+.q-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.q-opt {
+  text-align: left;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  transition: all 0.15s;
+}
+.q-opt:hover:not(:disabled) {
+  border-color: var(--red);
+  background: var(--surface-2);
+}
+.q-opt.ok {
+  border-color: var(--red);
+  color: var(--red);
+  font-weight: bold;
+  background: rgba(230, 57, 70, 0.08);
+}
+.q-opt.no {
+  border-color: var(--border);
+  color: var(--faint);
+  text-decoration: line-through;
+}
+.q-fb {
+  padding: 0.8rem 1rem;
+  background: var(--bg);
+  border-left: 3px solid var(--red);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  display: none;
+}
+.q-fb.show { display: block; }
+.q-fb strong { color: var(--red); }
+.q-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.q-score {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.btn {
+  background: var(--red);
+  color: #ffffff;
+  border: none;
+  padding: 0.55rem 1.3rem;
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--red-d); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.q-final {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.q-final .score {
+  font-size: 4.5rem;
+  color: var(--red);
+  font-weight: bold;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+.q-final .msg {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+/* ===== Bibliografie ===== */
+.biblio {
+  padding-left: 1.5rem;
+  color: var(--text);
+  font-size: 0.97rem;
+}
+.biblio li {
+  padding: 0.4rem 0;
+}
+.biblio li em { color: var(--red); }
+
+/* ===== Footer ===== */
+footer {
+  border-top: 2px solid var(--red);
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  background: #000000;
+}
+.foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding: 0 1.5rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 780px) {
+  .nav { flex-direction: column; gap: 0.5rem; padding: 0.7rem 1rem; }
+  nav { display: flex; flex-wrap: wrap; justify-content: center; }
+  nav a { margin: 0.2rem 0.5rem; font-size: 0.85rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.4rem; }
+  section { padding: 2.5rem 0; }
+  .foot { flex-direction: column; gap: 0.4rem; text-align: center; }
+  .block { padding: 1rem 1.1rem; }
+  .code { font-size: 0.78rem; }
+}
