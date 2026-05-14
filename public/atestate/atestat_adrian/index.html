@@ -3,19 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistemul Solar - Curiozitati</title>
+    <!-- TITLU PAGINA: apare in tab-ul browserului. Schimba aici daca dai alt nume proiectului. -->
+    <title>Chimia si reactii chimice — Introducere</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!--
+      ===== NAVIGATIA =====
+      Toate paginile au aceeasi structura de meniu. Daca adaugi o pagina noua,
+      copiaza un <li> de mai jos in TOATE fisierele html si schimba href + textul.
+      Clasa "active" marcheaza pagina curenta (ramane diferita pe fiecare pagina).
+    -->
     <header class="site-header">
       <div class="nav-wrap">
-        <p class="brand">Sistemul Solar</p>
+        <p class="brand">Chimia &amp; Reactii</p>
         <nav aria-label="Navigatie principala">
           <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="planete.html">Planetele</a></li>
-            <li><a href="soare.html">Soarele</a></li>
-            <li><a href="curiozitati-spatiu.html">Curiozitati</a></li>
+            <li><a href="index.html" class="active">Introducere</a></li>
+            <li><a href="tipuri-de-reactii.html">Tipuri de reactii</a></li>
+            <li><a href="elemente-si-compusi.html">Elemente &amp; compusi</a></li>
+            <li><a href="curiozitati-chimie.html">Curiozitati</a></li>
             <li><a href="bibliografie.html">Bibliografie</a></li>
           </ul>
         </nav>
@@ -23,38 +30,37 @@
     </header>
 
     <main>
+      <!-- ===== HERO ===== Titlu mare + descriere + butoane. -->
       <section class="hero reveal">
         <div>
-          <h1>Sistemul Solar — Curiozitati</h1>
+          <h1>Chimia si reactiile chimice</h1>
           <p>
-            Sistemul Solar este un ansamblu fascinant format din Soare si cei opt planete care ii orbiteaza,
-            insotite de sateliti naturali, asteroizi, comete si alte corpuri ceresti. Cu o varsta de
-            aproximativ 4,6 miliarde de ani, este leaganul vietii pe Pamant.
+            Chimia este stiinta care studiaza substantele — compozitia, structura, proprietatile
+            si transformarile lor. Reactiile chimice sunt procesele prin care substantele se
+            transforma unele in altele, formand combinatii noi cu proprietati diferite.
           </p>
           <p>
-            Exploreaza structura sistemului nostru solar, descopera secretele planetelor si afla
-            curiozitati uimitoare despre spatiul cosmic care ne inconjoara.
+            De la arderea unei lumanari pana la fotosinteza din frunze, intreaga lume care ne
+            inconjoara este guvernata de reactii chimice. Acest proiect exploreaza tipurile
+            principale de reactii, elementele si compusii implicati, precum si curiozitati
+            fascinante din lumea moleculelor.
           </p>
           <div class="cta-row">
-            <a class="btn primary" href="planete.html">Planetele</a>
-            <a class="btn ghost" href="soare.html">Soarele</a>
-            <a class="btn ghost" href="curiozitati-spatiu.html">Curiozitati</a>
+            <a class="btn primary" href="tipuri-de-reactii.html">Tipuri de reactii</a>
+            <a class="btn ghost" href="elemente-si-compusi.html">Elemente &amp; compusi</a>
+            <a class="btn ghost" href="curiozitati-chimie.html">Curiozitati</a>
           </div>
         </div>
-        <img
-          src="img/container.jpg"
-          alt="Imagine reprezentativa pentru Sistemul Solar"
-        />
+        <!-- Inlocuieste img/container.jpg cu o imagine relevanta (eprubete, molecule, etc.) -->
+        <img src="img/container.jpg" alt="Imagine reprezentativa pentru chimie" />
       </section>
 
+      <!-- ===== TABEL INFO PROIECT ===== -->
       <section class="atestat-table-wrap reveal">
         <h2>Informatii proiect</h2>
         <table class="atestat-table">
           <thead>
-            <tr>
-              <th>Rol</th>
-              <th>Nume</th>
-            </tr>
+            <tr><th>Rol</th><th>Nume</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -69,35 +75,38 @@
         </table>
       </section>
 
+      <!-- ===== GRID CU TILE-URI ===== Schimba textul fiecarui <article> pentru alt continut. -->
       <section class="section-card reveal">
         <h2>Ce vei descoperi pe acest site</h2>
         <div class="info-grid">
           <article class="info-tile">
-            <h3>Planetele</h3>
-            <p>Afli despre cele opt planete ale sistemului solar, de la micul Mercur pana la uriasul Neptun.</p>
+            <h3>Tipuri de reactii</h3>
+            <p>Reactiile de combinare, descompunere, substitutie, schimb si redox — cu exemple si ecuatii chimice.</p>
           </article>
           <article class="info-tile">
-            <h3>Soarele</h3>
-            <p>Descoperi secretele stelei noastre — structura, temperatura si influenta sa asupra sistemului solar.</p>
+            <h3>Elemente &amp; compusi</h3>
+            <p>Diferenta dintre elemente, compusi si amestecuri, plus exemple din tabelul periodic.</p>
           </article>
           <article class="info-tile">
             <h3>Curiozitati</h3>
-            <p>Inveti fapte surprinzatoare si fascinante despre spatiu, planete si corpuri ceresti.</p>
+            <p>Fapte surprinzatoare despre molecule, reactii spectaculoase si chimia din viata de zi cu zi.</p>
           </article>
         </div>
       </section>
 
+      <!-- ===== CONCLUZIE ===== Caseta verde din stanga. -->
       <section class="conclusion reveal" aria-label="Concluzie">
-        <h2>De ce studiem spatiul?</h2>
+        <h2>De ce studiem chimia?</h2>
         <p>
-          Studiul sistemului solar ne ajuta sa intelegem originea vietii pe Pamant, sa pregatim misiuni
-          spatiale si sa raspundem la una dintre cele mai profunde intrebari ale omenirii: suntem singuri
-          in univers? Astronomia este stiinta care transforma curiozitatea in cunoastere.
+          Chimia este la baza medicamentelor, materialelor noi, alimentelor si energiei pe care le folosim
+          in fiecare zi. Intelegerea reactiilor chimice ne ajuta sa explicam lumea inconjuratoare,
+          sa rezolvam probleme de mediu si sa construim tehnologii pentru viitor.
         </p>
       </section>
     </main>
 
-    <footer class="site-footer">Proiect educational — Sistemul Solar: Curiozitati | Moroșanu Marius-Gabriel</footer>
-    <script src="script.js"></script>
+    <footer class="site-footer">
+      Proiect educational — Chimia si reactii chimice | Moroșanu Marius-Gabriel
+    </footer>
   </body>
 </html>

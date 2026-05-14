@@ -1,42 +1,72 @@
+/* =====================================================================
+   ATESTAT — "Chimia si reactii chimice"
+   Tema: stiinta / laborator (paleta intunecata, accente verde-smarald)
+
+   ===== GHID RAPID DE MODIFICARI =====
+   1. Culorile principale se schimba in blocul ":root" de mai jos.
+      - --bg, --bg-deep ........ fundalul paginii (cel mai inchis)
+      - --card, --card-2 ....... cardurile / casetele
+      - --ink .................. culoarea textului normal
+      - --muted ................ text secundar (paragrafe gri)
+      - --line ................. liniile / chenarele
+      - --primary, --primary-2 . accent principal (verde smarald)
+      - --accent ............... accent secundar (turcoaz lab)
+      - --warn ................. galben de avertizare (atentie)
+      - --danger ............... rosu pentru reactii periculoase
+   2. Tipografia se schimba in regula "body { font-family: ... }".
+   3. Latimea continutului se schimba din "main { max-width: 1080px }".
+   4. Pentru a face fundalul si mai inchis, scade luminozitatea
+      la --bg si --bg-deep (de ex. #000204).
+   5. Pentru a folosi tema pe orice element nou, foloseste
+      clasele: .section-card, .info-grid, .info-tile, .conclusion,
+      .btn .primary / .ghost, .fact-list, .atestat-table.
+   ===================================================================== */
+
 :root {
-  --bg: #06030f;
-  --card: #110a24;
-  --ink: #eef2ff;
-  --muted: #9288b4;
-  --line: #251848;
-  --primary: #f5720a;
-  --primary-2: #ff9040;
-  --accent: #38d4f5;
-  --shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
+  /* === PALETA INTUNECATA "LABORATOR DE CHIMIE" === */
+  --bg:         #02080a;  /* fundal global, aproape negru cu nuanta petrol */
+  --bg-deep:    #010406;  /* fundalul cel mai inchis (sectiuni inferioare) */
+  --card:       #061013;  /* card standard, petrol foarte inchis */
+  --card-2:     #081619;  /* card alternativ (randuri pare in tabele) */
+  --ink:        #dcefe7;  /* text principal, alb-verzui */
+  --muted:      #7a988b;  /* text secundar, gri-verzui */
+  --line:       #0f2a2e;  /* contur subtire */
+  --primary:    #1faa6e;  /* verde smarald — actiune principala */
+  --primary-2:  #138a55;  /* verde smarald inchis — hover / accent */
+  --accent:     #00c4b4;  /* turcoaz — accent secundar (eprubete) */
+  --warn:       #d49b1c;  /* galben — caseta atentie */
+  --danger:     #b8342a;  /* rosu — reactii reactive / periculoase */
+  --shadow:     0 14px 36px rgba(0, 0, 0, 0.75);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
+html, body { margin: 0; padding: 0; }
 
 body {
   font-family: "Segoe UI", Tahoma, sans-serif;
   color: var(--ink);
   line-height: 1.65;
+
+  /* Fundal cu "halouri" subtile — sugereaza vapori intr-un laborator.
+     Modifica procentele (15%, 85%, 50%) ca sa muti aceste pete de lumina. */
   background:
-    radial-gradient(circle at 15% 20%, rgba(245, 114, 10, 0.14), transparent 32%),
-    radial-gradient(circle at 85% 10%, rgba(56, 212, 245, 0.10), transparent 28%),
-    radial-gradient(circle at 50% 80%, rgba(120, 40, 200, 0.10), transparent 35%),
-    linear-gradient(180deg, #0a0520 0%, var(--bg) 45%, #030108 100%);
+    radial-gradient(circle at 15% 20%, rgba(31, 170, 110, 0.10), transparent 32%),
+    radial-gradient(circle at 85% 12%, rgba(0, 196, 180, 0.08), transparent 30%),
+    radial-gradient(circle at 50% 85%, rgba(212, 155, 28, 0.06), transparent 35%),
+    linear-gradient(180deg, #03090b 0%, var(--bg) 45%, var(--bg-deep) 100%);
+  min-height: 100vh;
 }
 
+/* ===== HEADER / NAVIGATIE =====
+   Modifica "background" daca vrei o bara de navigare alt fel colorata.
+   "backdrop-filter" da efectul de sticla mata pe scroll. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 40;
   border-bottom: 1px solid var(--line);
-  background: rgba(6, 3, 15, 0.93);
+  background: rgba(2, 8, 10, 0.94);
   backdrop-filter: blur(8px);
 }
 
@@ -53,8 +83,10 @@ body {
 .brand {
   margin: 0;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   color: var(--accent);
+  text-transform: uppercase;
+  font-size: 0.95rem;
 }
 
 nav ul {
@@ -77,13 +109,14 @@ nav a {
 
 nav a:hover,
 nav a:focus-visible {
-  background: #1e0e40;
+  background: #0a2a26;
   transform: translateY(-1px);
 }
 
+/* Linkul paginii curente — culoarea de fundal vine din --primary */
 nav a.active {
-  color: #06030f;
-  background: linear-gradient(120deg, #38d4f5, #60e4ff);
+  color: #021410;
+  background: linear-gradient(120deg, var(--primary), var(--accent));
   font-weight: 700;
 }
 
@@ -93,12 +126,13 @@ main {
   padding: 2rem 1rem 3rem;
 }
 
+/* ===== SECTIUNEA HERO (din index.html) ===== */
 .hero {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 1.1rem;
-  background: linear-gradient(145deg, rgba(17, 10, 36, 0.97), rgba(10, 5, 24, 0.95));
+  background: linear-gradient(145deg, rgba(6, 16, 19, 0.97), rgba(2, 8, 10, 0.95));
   box-shadow: var(--shadow);
   padding: 1.2rem;
   display: grid;
@@ -106,15 +140,16 @@ main {
   gap: 1rem;
 }
 
+/* Halo decorativ in coltul dreapta-sus al hero-ului */
 .hero::after {
   content: "";
   position: absolute;
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(245, 114, 10, 0.22), transparent 70%);
-  right: -100px;
-  top: -100px;
+  background: radial-gradient(circle, rgba(31, 170, 110, 0.22), transparent 70%);
+  right: -110px;
+  top: -110px;
 }
 
 .hero h1 {
@@ -122,20 +157,17 @@ main {
   margin-bottom: 0.75rem;
   line-height: 1.2;
   font-size: clamp(1.6rem, 3.8vw, 2.6rem);
-  color: #e0f4ff;
+  color: #e6fff5;
 }
 
-.hero p {
-  color: var(--muted);
-  margin-top: 0;
-}
+.hero p { color: var(--muted); margin-top: 0; }
 
 .hero img {
   width: 100%;
   height: clamp(230px, 34vw, 360px);
   object-fit: contain;
   object-position: center;
-  background: linear-gradient(180deg, #110a24 0%, #0a0520 100%);
+  background: linear-gradient(180deg, #061013 0%, #02080a 100%);
   border-radius: 0.9rem;
   border: 1px solid var(--line);
   padding: 0.5rem;
@@ -148,6 +180,7 @@ main {
   gap: 0.65rem;
 }
 
+/* ===== BUTOANE ===== */
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -158,41 +191,40 @@ main {
 }
 
 .btn.primary {
-  color: #06030f;
-  background: linear-gradient(120deg, #f5720a, #ff9040);
+  color: #021410;
+  background: linear-gradient(120deg, var(--primary), var(--accent));
 }
 
 .btn.ghost {
   color: var(--ink);
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-2px);
-  filter: brightness(1.1);
+  filter: brightness(1.12);
 }
 
+/* ===== CARDURI DE SECTIUNE ===== */
 .section-card {
   margin-top: 1.2rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: var(--card);
   padding: 1rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
 }
 
+.section-card h1 { color: #e6fff5; margin-top: 0; }
 .section-card h2 {
   margin-top: 0;
   margin-bottom: 0.6rem;
-  color: #c4e8ff;
+  color: var(--accent);
 }
 
-.section-card h1 {
-  color: #e0f4ff;
-}
-
+/* Grila cu placi de informatii (ex: tipuri de reactii) */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -203,81 +235,76 @@ main {
   border: 1px solid var(--line);
   border-radius: 0.85rem;
   padding: 0.85rem;
-  background: #0a0420;
+  background: var(--card-2);
+  transition: transform 200ms ease, border-color 200ms ease;
 }
 
-.info-tile h2,
+.info-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-2);
+}
+
 .info-tile h3 {
-  color: #c4e8ff;
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 0.45rem;
 }
 
-.fact-list {
-  margin: 0;
-  padding-left: 1.2rem;
-}
+/* Lista de fapte / curiozitati */
+.fact-list { margin: 0; padding-left: 1.2rem; }
+.fact-list li + li { margin-top: 0.55rem; }
+.fact-list li::marker { color: var(--accent); }
 
-.fact-list li + li {
-  margin-top: 0.55rem;
-}
-
+/* ===== CONCLUZIE (banda verde stanga) =====
+   Schimba "border-left" cu --danger pentru un ton de avertizare. */
 .conclusion {
   margin-top: 1.35rem;
   border: 1px solid var(--line);
   border-left: 6px solid var(--primary);
   border-radius: 0.85rem;
-  background: #0d0820;
+  background: #050f0c;
   padding: 1rem;
 }
 
-.conclusion h2 {
-  color: #c4e8ff;
-}
+.conclusion h2 { color: var(--accent); margin-top: 0; }
 
 .site-footer {
   text-align: center;
   color: var(--muted);
   padding: 1.4rem 1rem 2.2rem;
+  font-size: 0.92rem;
 }
 
-.reveal {
-  animation: fadeUp 550ms ease both;
-}
+/* ===== ANIMATIE LA INCARCARE ===== */
+.reveal { animation: fadeUp 550ms ease both; }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .reveal:nth-child(2) { animation-delay: 80ms; }
 .reveal:nth-child(3) { animation-delay: 160ms; }
 .reveal:nth-child(4) { animation-delay: 240ms; }
+.reveal:nth-child(5) { animation-delay: 320ms; }
 
+/* ===== TABEL CU INFO DESPRE PROIECT (index.html) ===== */
 .atestat-table-wrap {
   margin-top: 1.2rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: var(--card);
   padding: 1rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
 }
 
 .atestat-table-wrap h2 {
   margin-top: 0;
   margin-bottom: 0.8rem;
-  color: #c4e8ff;
+  color: var(--accent);
 }
 
-.atestat-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.97rem;
-}
+.atestat-table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
 
 .atestat-table th,
 .atestat-table td {
@@ -287,54 +314,55 @@ main {
 }
 
 .atestat-table thead th {
-  background: linear-gradient(120deg, #f5720a, #ff9040);
-  color: #06030f;
+  background: linear-gradient(120deg, var(--primary), var(--primary-2));
+  color: #021410;
   font-weight: 700;
 }
 
-.atestat-table tbody tr:nth-child(even) {
-  background: #0a0420;
-}
+.atestat-table tbody tr:nth-child(even) { background: var(--card-2); }
 
-.biblio-list {
-  margin: 0;
-  padding-left: 1.2rem;
-}
-
-.biblio-list li {
-  margin-bottom: 0.7rem;
-}
+/* ===== BIBLIOGRAFIE ===== */
+.biblio-list { margin: 0; padding-left: 1.2rem; }
+.biblio-list li { margin-bottom: 0.7rem; }
 
 .biblio-list a {
-  color: var(--primary-2);
+  color: var(--primary);
   text-decoration: none;
   word-break: break-all;
 }
 
-.biblio-list a:hover {
-  text-decoration: underline;
+.biblio-list a:hover { text-decoration: underline; color: var(--accent); }
+
+/* ===== CASETA DE AVERTIZARE (optional, foloseste-o cu <div class="warn-box">) ===== */
+.warn-box {
+  margin-top: 1rem;
+  border: 1px solid var(--warn);
+  border-left: 6px solid var(--warn);
+  background: rgba(212, 155, 28, 0.06);
+  border-radius: 0.7rem;
+  padding: 0.85rem 1rem;
+  color: #f3e2b6;
 }
 
+/* ===== ECUATII CHIMICE (foloseste cu <code class="eq">...</code>) =====
+   Le scoatem in evidenta cu un fundal mat. Indicii sub/sup sunt
+   deja sustinuti nativ in HTML (<sub>, <sup>). */
+code.eq {
+  display: inline-block;
+  font-family: "Cascadia Mono", "Consolas", monospace;
+  background: #03100d;
+  color: #b8f5d4;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.98em;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 800px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-wrap {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav ul {
-    width: 100%;
-  }
-
-  nav li {
-    flex: 1;
-  }
-
-  nav a {
-    width: 100%;
-    text-align: center;
-  }
+  .hero { grid-template-columns: 1fr; }
+  .nav-wrap { flex-direction: column; align-items: flex-start; }
+  nav ul { width: 100%; }
+  nav li { flex: 1; }
+  nav a { width: 100%; text-align: center; }
 }
